@@ -1,1 +1,2 @@
-# eternaltriangle
+# EternalTriangle
+
