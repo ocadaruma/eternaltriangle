@@ -11,6 +11,9 @@
 		DE0B65331B94848A0045CA5C /* StringScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65321B94848A0045CA5C /* StringScanner.swift */; };
 		DE0B65681B94879C0045CA5C /* EternalTriangle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B64D81B947D5D0045CA5C /* EternalTriangle.framework */; };
 		DE0B65701B9487BA0045CA5C /* StringScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B656F1B9487BA0045CA5C /* StringScannerTests.swift */; };
+		DE0B65731B948A370045CA5C /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65721B948A370045CA5C /* Core.swift */; };
+		DE0B65751B948DA90045CA5C /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65741B948DA90045CA5C /* Element.swift */; };
+		DE0B65771B9499FE0045CA5C /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65761B9499FE0045CA5C /* Parser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +34,9 @@
 		DE0B65621B94879C0045CA5C /* EternalTriangleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EternalTriangleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE0B65651B94879C0045CA5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE0B656F1B9487BA0045CA5C /* StringScannerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringScannerTests.swift; sourceTree = "<group>"; };
+		DE0B65721B948A370045CA5C /* Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
+		DE0B65741B948DA90045CA5C /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
+		DE0B65761B9499FE0045CA5C /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +79,7 @@
 		DE0B64DA1B947D5D0045CA5C /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				DE0B65311B94844E0045CA5C /* Audio */,
+				DE0B65311B94844E0045CA5C /* Core */,
 				DE0B65301B9484450045CA5C /* Misc */,
 				DE0B64DD1B947D5E0045CA5C /* EternalTriangle.h */,
 				DE0B64DB1B947D5E0045CA5C /* Supporting Files */,
@@ -98,11 +104,14 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
-		DE0B65311B94844E0045CA5C /* Audio */ = {
+		DE0B65311B94844E0045CA5C /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				DE0B65721B948A370045CA5C /* Core.swift */,
+				DE0B65741B948DA90045CA5C /* Element.swift */,
+				DE0B65761B9499FE0045CA5C /* Parser.swift */,
 			);
-			name = Audio;
+			name = Core;
 			sourceTree = "<group>";
 		};
 		DE0B65631B94879C0045CA5C /* Tests */ = {
@@ -238,7 +247,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE0B65731B948A370045CA5C /* Core.swift in Sources */,
+				DE0B65771B9499FE0045CA5C /* Parser.swift in Sources */,
 				DE0B65331B94848A0045CA5C /* StringScanner.swift in Sources */,
+				DE0B65751B948DA90045CA5C /* Element.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
