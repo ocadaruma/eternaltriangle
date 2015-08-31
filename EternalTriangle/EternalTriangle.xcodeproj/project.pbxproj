@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		DE0B64DE1B947D5E0045CA5C /* EternalTriangle.h in Headers */ = {isa = PBXBuildFile; fileRef = DE0B64DD1B947D5E0045CA5C /* EternalTriangle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DE0B64E41B947D5E0045CA5C /* EternalTriangle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B64D81B947D5D0045CA5C /* EternalTriangle.framework */; };
-		DE0B64EB1B947D5E0045CA5C /* EternalTriangleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B64EA1B947D5E0045CA5C /* EternalTriangleTests.swift */; };
+		DE0B65331B94848A0045CA5C /* StringScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65321B94848A0045CA5C /* StringScanner.swift */; };
+		DE0B65681B94879C0045CA5C /* EternalTriangle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B64D81B947D5D0045CA5C /* EternalTriangle.framework */; };
+		DE0B65701B9487BA0045CA5C /* StringScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B656F1B9487BA0045CA5C /* StringScannerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		DE0B64E51B947D5E0045CA5C /* PBXContainerItemProxy */ = {
+		DE0B65691B94879C0045CA5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DE0B64CF1B947D5D0045CA5C /* Project object */;
 			proxyType = 1;
@@ -26,9 +27,10 @@
 		DE0B64D81B947D5D0045CA5C /* EternalTriangle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EternalTriangle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE0B64DC1B947D5E0045CA5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE0B64DD1B947D5E0045CA5C /* EternalTriangle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EternalTriangle.h; sourceTree = "<group>"; };
-		DE0B64E31B947D5E0045CA5C /* EternalTriangleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EternalTriangleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DE0B64E91B947D5E0045CA5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DE0B64EA1B947D5E0045CA5C /* EternalTriangleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EternalTriangleTests.swift; sourceTree = "<group>"; };
+		DE0B65321B94848A0045CA5C /* StringScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringScanner.swift; sourceTree = "<group>"; };
+		DE0B65621B94879C0045CA5C /* EternalTriangleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EternalTriangleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE0B65651B94879C0045CA5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE0B656F1B9487BA0045CA5C /* StringScannerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringScannerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,11 +41,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DE0B64E01B947D5E0045CA5C /* Frameworks */ = {
+		DE0B655F1B94879C0045CA5C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE0B64E41B947D5E0045CA5C /* EternalTriangle.framework in Frameworks */,
+				DE0B65681B94879C0045CA5C /* EternalTriangle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,8 +55,8 @@
 		DE0B64CE1B947D5D0045CA5C = {
 			isa = PBXGroup;
 			children = (
-				DE0B64DA1B947D5D0045CA5C /* EternalTriangle */,
-				DE0B64E71B947D5E0045CA5C /* EternalTriangleTests */,
+				DE0B64DA1B947D5D0045CA5C /* Source */,
+				DE0B65631B94879C0045CA5C /* Tests */,
 				DE0B64D91B947D5D0045CA5C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,17 +65,20 @@
 			isa = PBXGroup;
 			children = (
 				DE0B64D81B947D5D0045CA5C /* EternalTriangle.framework */,
-				DE0B64E31B947D5E0045CA5C /* EternalTriangleTests.xctest */,
+				DE0B65621B94879C0045CA5C /* EternalTriangleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DE0B64DA1B947D5D0045CA5C /* EternalTriangle */ = {
+		DE0B64DA1B947D5D0045CA5C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				DE0B65311B94844E0045CA5C /* Audio */,
+				DE0B65301B9484450045CA5C /* Misc */,
 				DE0B64DD1B947D5E0045CA5C /* EternalTriangle.h */,
 				DE0B64DB1B947D5E0045CA5C /* Supporting Files */,
 			);
+			name = Source;
 			path = EternalTriangle;
 			sourceTree = "<group>";
 		};
@@ -85,21 +90,45 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		DE0B64E71B947D5E0045CA5C /* EternalTriangleTests */ = {
+		DE0B65301B9484450045CA5C /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				DE0B64EA1B947D5E0045CA5C /* EternalTriangleTests.swift */,
-				DE0B64E81B947D5E0045CA5C /* Supporting Files */,
+				DE0B65321B94848A0045CA5C /* StringScanner.swift */,
 			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
+		DE0B65311B94844E0045CA5C /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
+		DE0B65631B94879C0045CA5C /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				DE0B656E1B9487AC0045CA5C /* Misc */,
+				DE0B65641B94879C0045CA5C /* Supporting Files */,
+			);
+			name = Tests;
 			path = EternalTriangleTests;
 			sourceTree = "<group>";
 		};
-		DE0B64E81B947D5E0045CA5C /* Supporting Files */ = {
+		DE0B65641B94879C0045CA5C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DE0B64E91B947D5E0045CA5C /* Info.plist */,
+				DE0B65651B94879C0045CA5C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DE0B656E1B9487AC0045CA5C /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				DE0B656F1B9487BA0045CA5C /* StringScannerTests.swift */,
+			);
+			name = Misc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,22 +163,22 @@
 			productReference = DE0B64D81B947D5D0045CA5C /* EternalTriangle.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		DE0B64E21B947D5E0045CA5C /* EternalTriangleTests */ = {
+		DE0B65611B94879C0045CA5C /* EternalTriangleTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DE0B64F11B947D5E0045CA5C /* Build configuration list for PBXNativeTarget "EternalTriangleTests" */;
+			buildConfigurationList = DE0B656B1B94879C0045CA5C /* Build configuration list for PBXNativeTarget "EternalTriangleTests" */;
 			buildPhases = (
-				DE0B64DF1B947D5E0045CA5C /* Sources */,
-				DE0B64E01B947D5E0045CA5C /* Frameworks */,
-				DE0B64E11B947D5E0045CA5C /* Resources */,
+				DE0B655E1B94879C0045CA5C /* Sources */,
+				DE0B655F1B94879C0045CA5C /* Frameworks */,
+				DE0B65601B94879C0045CA5C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DE0B64E61B947D5E0045CA5C /* PBXTargetDependency */,
+				DE0B656A1B94879C0045CA5C /* PBXTargetDependency */,
 			);
 			name = EternalTriangleTests;
 			productName = EternalTriangleTests;
-			productReference = DE0B64E31B947D5E0045CA5C /* EternalTriangleTests.xctest */;
+			productReference = DE0B65621B94879C0045CA5C /* EternalTriangleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -164,7 +193,7 @@
 					DE0B64D71B947D5D0045CA5C = {
 						CreatedOnToolsVersion = 6.4;
 					};
-					DE0B64E21B947D5E0045CA5C = {
+					DE0B65611B94879C0045CA5C = {
 						CreatedOnToolsVersion = 6.4;
 					};
 				};
@@ -182,7 +211,7 @@
 			projectRoot = "";
 			targets = (
 				DE0B64D71B947D5D0045CA5C /* EternalTriangle */,
-				DE0B64E21B947D5E0045CA5C /* EternalTriangleTests */,
+				DE0B65611B94879C0045CA5C /* EternalTriangleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -195,7 +224,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DE0B64E11B947D5E0045CA5C /* Resources */ = {
+		DE0B65601B94879C0045CA5C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -209,24 +238,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE0B65331B94848A0045CA5C /* StringScanner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DE0B64DF1B947D5E0045CA5C /* Sources */ = {
+		DE0B655E1B94879C0045CA5C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE0B64EB1B947D5E0045CA5C /* EternalTriangleTests.swift in Sources */,
+				DE0B65701B9487BA0045CA5C /* StringScannerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		DE0B64E61B947D5E0045CA5C /* PBXTargetDependency */ = {
+		DE0B656A1B94879C0045CA5C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DE0B64D71B947D5D0045CA5C /* EternalTriangle */;
-			targetProxy = DE0B64E51B947D5E0045CA5C /* PBXContainerItemProxy */;
+			targetProxy = DE0B65691B94879C0045CA5C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -323,6 +353,7 @@
 		DE0B64EF1B947D5E0045CA5C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -333,12 +364,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		DE0B64F01B947D5E0045CA5C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -352,7 +385,7 @@
 			};
 			name = Release;
 		};
-		DE0B64F21B947D5E0045CA5C /* Debug */ = {
+		DE0B656C1B94879C0045CA5C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -364,12 +397,13 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = EternalTriangleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		DE0B64F31B947D5E0045CA5C /* Release */ = {
+		DE0B656D1B94879C0045CA5C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -377,6 +411,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = EternalTriangleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -401,12 +436,13 @@
 				DE0B64F01B947D5E0045CA5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		DE0B64F11B947D5E0045CA5C /* Build configuration list for PBXNativeTarget "EternalTriangleTests" */ = {
+		DE0B656B1B94879C0045CA5C /* Build configuration list for PBXNativeTarget "EternalTriangleTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DE0B64F21B947D5E0045CA5C /* Debug */,
-				DE0B64F31B947D5E0045CA5C /* Release */,
+				DE0B656C1B94879C0045CA5C /* Debug */,
+				DE0B656D1B94879C0045CA5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

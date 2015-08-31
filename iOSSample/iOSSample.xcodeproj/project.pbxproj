@@ -471,6 +471,7 @@
 				DE0B65191B947FD00045CA5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DE0B651A1B947FD00045CA5C /* Build configuration list for PBXNativeTarget "iOSSampleTests" */ = {
 			isa = XCConfigurationList;
@@ -479,6 +480,7 @@
 				DE0B651C1B947FD00045CA5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
