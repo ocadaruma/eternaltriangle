@@ -14,6 +14,8 @@
 		DE0B65731B948A370045CA5C /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65721B948A370045CA5C /* Core.swift */; };
 		DE0B65751B948DA90045CA5C /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65741B948DA90045CA5C /* Element.swift */; };
 		DE0B65771B9499FE0045CA5C /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65761B9499FE0045CA5C /* Parser.swift */; };
+		DE0B657A1B949D590045CA5C /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65791B949D590045CA5C /* Information.swift */; };
+		DE0B657D1B94A1180045CA5C /* Tune.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B657C1B94A1180045CA5C /* Tune.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 		DE0B65721B948A370045CA5C /* Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
 		DE0B65741B948DA90045CA5C /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
 		DE0B65761B9499FE0045CA5C /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		DE0B65791B949D590045CA5C /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
+		DE0B657C1B94A1180045CA5C /* Tune.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tune.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,8 @@
 				DE0B65721B948A370045CA5C /* Core.swift */,
 				DE0B65741B948DA90045CA5C /* Element.swift */,
 				DE0B65761B9499FE0045CA5C /* Parser.swift */,
+				DE0B65791B949D590045CA5C /* Information.swift */,
+				DE0B657C1B94A1180045CA5C /* Tune.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -248,8 +254,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE0B65731B948A370045CA5C /* Core.swift in Sources */,
+				DE0B657D1B94A1180045CA5C /* Tune.swift in Sources */,
 				DE0B65771B9499FE0045CA5C /* Parser.swift in Sources */,
 				DE0B65331B94848A0045CA5C /* StringScanner.swift in Sources */,
+				DE0B657A1B949D590045CA5C /* Information.swift in Sources */,
 				DE0B65751B948DA90045CA5C /* Element.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

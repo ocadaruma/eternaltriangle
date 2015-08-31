@@ -8,11 +8,11 @@
 
 import Foundation
 
-// parse string in subset of ABC notation to elements
+// parse string in subset of ABC notation to tune
 public class Parser {
-  func parse(string: String) -> [Element] {
-    let scanner = StringScanner(string: string)
-
-    return []
-  }
+//  public func parse(string: String) -> Tune {
+//    let scanner = StringScanner(string: string)
+//
+//
+//  }
 }
