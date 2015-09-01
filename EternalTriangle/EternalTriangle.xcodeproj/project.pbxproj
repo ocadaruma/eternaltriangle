@@ -16,6 +16,7 @@
 		DE0B65771B9499FE0045CA5C /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65761B9499FE0045CA5C /* Parser.swift */; };
 		DE0B657A1B949D590045CA5C /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65791B949D590045CA5C /* Information.swift */; };
 		DE0B657D1B94A1180045CA5C /* Tune.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B657C1B94A1180045CA5C /* Tune.swift */; };
+		DE0B65821B9520E00045CA5C /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65811B9520E00045CA5C /* ParserTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		DE0B65761B9499FE0045CA5C /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		DE0B65791B949D590045CA5C /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		DE0B657C1B94A1180045CA5C /* Tune.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tune.swift; sourceTree = "<group>"; };
+		DE0B65811B9520E00045CA5C /* ParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 		DE0B65631B94879C0045CA5C /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				DE0B657E1B95207E0045CA5C /* Core */,
 				DE0B656E1B9487AC0045CA5C /* Misc */,
 				DE0B65641B94879C0045CA5C /* Supporting Files */,
 			);
@@ -144,6 +147,14 @@
 				DE0B656F1B9487BA0045CA5C /* StringScannerTests.swift */,
 			);
 			name = Misc;
+			sourceTree = "<group>";
+		};
+		DE0B657E1B95207E0045CA5C /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				DE0B65811B9520E00045CA5C /* ParserTests.swift */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE0B65821B9520E00045CA5C /* ParserTests.swift in Sources */,
 				DE0B65701B9487BA0045CA5C /* StringScannerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,6 +477,7 @@
 				DE0B656D1B94879C0045CA5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,8 +8,12 @@
 
 import Foundation
 
+struct Parser<Result> {
+  typealias RegexParser = String -> (Result?, String)
+}
+
 // parse string in subset of ABC notation to tune
-public class Parser {
+public class ABCParser {
 //  public func parse(string: String) -> Tune {
 //    let scanner = StringScanner(string: string)
 //

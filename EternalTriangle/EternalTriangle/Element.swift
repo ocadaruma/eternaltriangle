@@ -8,36 +8,47 @@
 
 import Foundation
 
-public protocol Element { }
-public protocol HasLength : Element {
+public protocol MusicalElement {}
+public protocol HasLength : MusicalElement {
   var length: NoteLength { get }
 }
 
-public struct DefaultElement : Element { }
+public enum ClefName {
+  case Treble, Bass
+}
 
-// singleton objects
-public let BarLine = DefaultElement()
-public let DoubleBarLine = DefaultElement()
-public let SlurStart = DefaultElement()
-public let SlurEnd = DefaultElement()
-public let Tie = DefaultElement()
+public enum Simple : MusicalElement {
+  case BarLine
+  case DoubleBarLine
+  case SlurStart
+  case SlurEnd
+  case Tie
+  case LineBreak
+}
 
-// elements has length
+public struct Clef : MusicalElement {
+  public let clefName: ClefName
+  public let middle: Pitch
+}
+
 public struct Note : HasLength {
   public let length: NoteLength
+  public let pitch: Pitch
 }
-public struct Rest : HasLength {
+
+public struct Rest: HasLength {
   public let length: NoteLength
 }
+
 public struct Chord : HasLength {
   public let length: NoteLength
   public let pitches: [Pitch]
 }
 
-public struct Tuplet : Element {
+public struct Tuplet : MusicalElement {
   public let notes: Int
   public let inTimeOf: Int? = nil
-  public let defaultTime: Int = 3
+  static let defaultTime: Int = 3
 
   public let elements: [HasLength]
 
@@ -48,7 +59,7 @@ public struct Tuplet : Element {
       switch notes {
       case 2, 4, 8: return 3
       case 3, 6: return 2
-      default: return defaultTime
+      default: return Tuplet.defaultTime
       }
     }
   }

@@ -19,24 +19,24 @@ public struct TuneTitle : Information {
 
 public struct Composer : Information {
   public static let prefix = "C"
-  let name: String
+  public let name: String
 }
 
 public struct Meter : Information {
   public static let prefix = "M"
-  let numerator: Int
-  let denominator: Int
+  public let numerator: Int
+  public let denominator: Int
 }
 
 public struct UnitNoteLength : Information {
   public static let prefix = "L"
-  let length: NoteLength
+  public let length: NoteLength
 }
 
 public struct Tempo : Information {
   public static let prefix = "Q"
-  let bpm: Int
-  let inLength: NoteLength
+  public let bpm: Int
+  public let inLength: NoteLength
 }
 
 public enum KeySignature {
@@ -47,5 +47,11 @@ public enum KeySignature {
 
 public struct Key : Information {
   public static let prefix = "K"
-  let keySignature: KeySignature
+  public let keySignature: KeySignature
+}
+
+public struct VoiceHeader : Information {
+  public static let prefix = "V"
+  public let id: String
+  public let clef: Clef
 }

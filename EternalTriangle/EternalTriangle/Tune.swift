@@ -8,6 +8,15 @@
 
 import Foundation
 
+public struct Voice {
+  public let voiceHeader: VoiceHeader
+  public let elements: [MusicalElement]
+}
+
+public struct VoiceGroup {
+  public let voices: [Voice]
+}
+
 public struct TuneHeader {
   let tuneTitle: TuneTitle
   let composer: Composer
@@ -18,7 +27,7 @@ public struct TuneHeader {
 }
 
 public struct TuneBody {
-  let elements: [Element]
+  let voiceGroups: [VoiceGroup]
 }
 
 public struct Tune {
