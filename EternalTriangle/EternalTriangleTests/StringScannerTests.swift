@@ -13,23 +13,24 @@ import EternalTriangle
 class StringScannerTests: XCTestCase {
   func testScan() {
     let s = StringScanner(string: "This is an example string")
+    let empty: [MatchResult] = []
     XCTAssertFalse(s.eos)
-    XCTAssert(s.scan("\\w+") == "This")
-    XCTAssertNil(s.scan("\\w+"))
-    XCTAssert(s.scan("\\s+") == " ")
-    XCTAssertNil(s.scan("\\s+"))
-    XCTAssert(s.scan("\\w+") == "is")
+    XCTAssertEqual(s.scan("\\w+").first!.match, "This")
+    XCTAssert(s.scan("\\w+").isEmpty)
+    XCTAssertEqual(s.scan("\\s+").first!.match, " ")
+    XCTAssert(s.scan("\\s+").isEmpty)
+    XCTAssertEqual(s.scan("\\w+").first!.match, "is")
     XCTAssertFalse(s.eos)
 
-    XCTAssert(s.scan("\\s+") == " ")
-    XCTAssert(s.scan("\\w+") == "an")
-    XCTAssert(s.scan("\\s+") == " ")
-    XCTAssert(s.scan("\\w+") == "example")
-    XCTAssert(s.scan("\\s+") == " ")
-    XCTAssert(s.scan("\\w+") == "string")
+    XCTAssertEqual(s.scan("\\s+").first!.match, " ")
+    XCTAssertEqual(s.scan("\\w+").first!.match, "an")
+    XCTAssertEqual(s.scan("\\s+").first!.match, " ")
+    XCTAssertEqual(s.scan("\\w+").first!.match, "example")
+    XCTAssertEqual(s.scan("\\s+").first!.match, " ")
+    XCTAssertEqual(s.scan("\\w+").first!.match, "string")
     XCTAssert(s.eos)
 
-    XCTAssertNil(s.scan("\\s+"))
-    XCTAssertNil(s.scan("\\w+"))
+    XCTAssert(s.scan("\\s+").isEmpty)
+    XCTAssert(s.scan("\\w+").isEmpty)
   }
 }

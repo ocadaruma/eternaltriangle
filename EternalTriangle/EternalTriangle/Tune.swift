@@ -19,7 +19,7 @@ public struct VoiceGroup {
 
 public struct TuneHeader {
   let tuneTitle: TuneTitle
-  let composer: Composer
+  let composer: Composer?
   let meter: Meter
   let unitNoteLength: UnitNoteLength
   let tempo: Tempo

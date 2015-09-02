@@ -8,33 +8,26 @@
 
 import Foundation
 
-public protocol Information {
-  static var prefix: String { get }
-}
+public protocol Information { }
 
 public struct TuneTitle : Information {
-  public static let prefix = "T"
   public let title: String
 }
 
 public struct Composer : Information {
-  public static let prefix = "C"
   public let name: String
 }
 
 public struct Meter : Information {
-  public static let prefix = "M"
   public let numerator: Int
   public let denominator: Int
 }
 
 public struct UnitNoteLength : Information {
-  public static let prefix = "L"
   public let length: NoteLength
 }
 
 public struct Tempo : Information {
-  public static let prefix = "Q"
   public let bpm: Int
   public let inLength: NoteLength
 }
@@ -46,12 +39,10 @@ public enum KeySignature {
 }
 
 public struct Key : Information {
-  public static let prefix = "K"
   public let keySignature: KeySignature
 }
 
 public struct VoiceHeader : Information {
-  public static let prefix = "V"
   public let id: String
   public let clef: Clef
 }
