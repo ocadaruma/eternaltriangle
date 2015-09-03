@@ -21,10 +21,10 @@ public extension String {
   }
 
   public func matchesWithPattern(pattern: String) -> [MatchResult] {
-    let regex = NSRegularExpression(pattern: pattern, options: nil, error: nil)
+    let regex = NSRegularExpression(pattern: pattern, options: .AnchorsMatchLines, error: nil)
 
     let match = regex?.firstMatchInString(self,
-      options: NSMatchingOptions.Anchored,
+      options: .Anchored,
       range: self.range)
 
     if let m = match {

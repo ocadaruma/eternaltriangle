@@ -18,11 +18,11 @@ public enum Accidental {
 
 public struct Pitch {
   public let name: PitchName
-  public let accidental: Accidental? = nil
+  public let accidental: Accidental?
   public let octave: Int
 }
 
-public enum UnitDenominator: Double {
+public enum UnitDenominator: Int {
   case Whole = 1
   case Half = 2
   case Quarter = 4
@@ -33,7 +33,15 @@ public enum UnitDenominator: Double {
 }
 
 public struct NoteLength {
-  public let unit: UnitDenominator
   public let numerator: Int
   public let denominator: Int
+}
+
+public enum ClefName : String {
+  case Treble = "treble"
+  case Bass = "bass"
+}
+
+public struct Clef {
+  public let clefName: ClefName
 }

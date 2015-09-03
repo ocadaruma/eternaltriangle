@@ -13,22 +13,14 @@ public protocol HasLength : MusicalElement {
   var length: NoteLength { get }
 }
 
-public enum ClefName {
-  case Treble, Bass
-}
-
 public enum Simple : MusicalElement {
   case BarLine
   case DoubleBarLine
   case SlurStart
   case SlurEnd
   case Tie
+  case Space
   case LineBreak
-}
-
-public struct Clef : MusicalElement {
-  public let clefName: ClefName
-  public let middle: Pitch
 }
 
 public struct Note : HasLength {
@@ -52,14 +44,16 @@ public struct Tuplet : MusicalElement {
 
   public let elements: [HasLength]
 
-  public func time() -> Int {
-    if let t = inTimeOf {
-      return t
-    } else {
-      switch notes {
-      case 2, 4, 8: return 3
-      case 3, 6: return 2
-      default: return Tuplet.defaultTime
+  public var time: Int {
+    get {
+      if let t = inTimeOf {
+        return t
+      } else {
+        switch notes {
+        case 2, 4, 8: return 3
+        case 3, 6: return 2
+        default: return Tuplet.defaultTime
+        }
       }
     }
   }

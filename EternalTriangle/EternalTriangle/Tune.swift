@@ -9,12 +9,8 @@
 import Foundation
 
 public struct Voice {
-  public let voiceHeader: VoiceHeader
+  public let id: String
   public let elements: [MusicalElement]
-}
-
-public struct VoiceGroup {
-  public let voices: [Voice]
 }
 
 public struct TuneHeader {
@@ -24,10 +20,11 @@ public struct TuneHeader {
   let unitNoteLength: UnitNoteLength
   let tempo: Tempo
   let key: Key
+  let voiceHeaders: [VoiceHeader]
 }
 
 public struct TuneBody {
-  let voiceGroups: [VoiceGroup]
+  let voices: [Voice]
 }
 
 public struct Tune {

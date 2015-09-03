@@ -8,26 +8,30 @@
 
 import Foundation
 
-public protocol Information { }
+public protocol Header { }
 
-public struct TuneTitle : Information {
+public struct Reference : Header {
+  public let number: Int
+}
+
+public struct TuneTitle : Header {
   public let title: String
 }
 
-public struct Composer : Information {
+public struct Composer : Header {
   public let name: String
 }
 
-public struct Meter : Information {
+public struct Meter : Header {
   public let numerator: Int
   public let denominator: Int
 }
 
-public struct UnitNoteLength : Information {
-  public let length: NoteLength
+public struct UnitNoteLength : Header {
+  public let denominator: UnitDenominator
 }
 
-public struct Tempo : Information {
+public struct Tempo : Header {
   public let bpm: Int
   public let inLength: NoteLength
 }
@@ -38,11 +42,11 @@ public enum KeySignature {
   case Flat1, Flat2, Flat3, Flat4, Flat5, Flat6, Flat7
 }
 
-public struct Key : Information {
+public struct Key : Header {
   public let keySignature: KeySignature
 }
 
-public struct VoiceHeader : Information {
+public struct VoiceHeader : Header {
   public let id: String
   public let clef: Clef
 }
