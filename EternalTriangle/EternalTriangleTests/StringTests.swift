@@ -32,4 +32,11 @@ class StringTests: XCTestCase {
     let matches = "abcDEFghi".matchesWithPattern("ghi")
     XCTAssertEqual(matches.count, 0)
   }
+
+  func testCaptureEmptyString() {
+    let matches = "abcDEFghi".matchesWithPattern("abcDEFghi(.*)")
+    XCTAssertEqual(matches.count, 2)
+    XCTAssertEqual(matches[0].match, "abcDEFghi")
+    XCTAssertEqual(matches[1].match, "")
+  }
 }

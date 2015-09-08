@@ -20,15 +20,66 @@ func createParser<T>(pattern: String, op: [MatchResult] -> T) -> String -> (T?, 
   }
 }
 
+func eatPattern(pattern: String) -> String -> (Bool, String) {
+  return { (string: String) -> (Bool, String) in
+    let scanner = StringScanner(string: string)
+    if scanner.scan(pattern).isEmpty {
+      return (false, string)
+    } else {
+      return (true, scanner.result)
+    }
+  }
+}
+
 // compose parsers.
 // if first parser returns nil, run second.
 func || <T, U> (f: T -> (U?, T), g: T -> (U?, T)) -> T -> (U?, T) {
-  return { (a: T) -> (U?, T) in
+  return { a -> (U?, T) in
     let (fR, rest) = f(a)
 
     switch fR {
     case .Some(let r): return (r, rest)
     case .None: return g(rest)
+    }
+  }
+}
+
+func && <T, U, V> (f: T -> (U?, T), g: T -> (V?, T)) -> T -> (U?, V?, T) {
+  return { a -> (U?, V?, T) in
+    let (fR, rest) = f(a)
+
+    switch fR {
+    case .Some(let r):
+      let (gR, gRest) = g(rest)
+      return (r, gR, gRest)
+    case .None: return (nil, nil, rest)
+    }
+  }
+}
+
+infix operator &> { associativity left }
+
+func &> <T, U, V> (f: T -> (U?, T), g: T -> (V?, T)) -> T -> (V?, T) {
+  return { a -> (V?, T) in
+    let (fR, rest) = f(a)
+
+    switch fR {
+    case .Some(let r):
+      let (gR, gRest) = g(rest)
+      return (gR, gRest)
+    case .None: return (nil, rest)
+    }
+  }
+}
+
+func &> <T, U> (f: T -> (Bool, T), g: T -> (U?, T)) -> T -> (U?, T) {
+  return { a -> (U?, T) in
+    let (fR, rest) = f(a)
+    if fR {
+      let (gR, gRest) = g(rest)
+      return (gR, gRest)
+    } else {
+      return (nil, rest)
     }
   }
 }
@@ -77,7 +128,7 @@ public let parseTempo = createParser("^Q:\\s*(\\d+)/(\\d+)=(\\d+)$\n?", { m -> H
 })
 
 public let parseKey = createParser("^K:\\s*([ABCDEFG][#b]?m?)$\n?", { m -> Header in
-  var sig = KeySignature.Zero
+  var sig: KeySignature
 
   switch m[1].match {
   case "C", "Am": sig = .Zero
@@ -111,17 +162,11 @@ public let parseVoiceHeader = createParser("^V:\\s*(\\w+)\\s*(?:clef=(\\w+))?$\n
   }
 })
 
-//public func parseComment<T>(string: String) -> (T?, String) {
-//  let scanner = StringScanner(string: string)
-//  let matches = scanner.scan("^%.*$\n?")
-//  return (nil, scanner.result)
-//}
-//
-//public func parseLine(string: String) -> (String?, String) {
-//  let scanner = StringScanner(string: string)
-//  let matches = scanner.scan("(^.*$)(\n)?")
-//  return (nil, scanner.result)
-//}
+public func parseComment<T>(string: String) -> (T?, String) {
+  let scanner = StringScanner(string: string)
+  let matches = scanner.scan("^%.*$\n?")
+  return (nil, scanner.result)
+}
 
 let parseHeader =
 parseReference ||
@@ -155,9 +200,128 @@ let parseSpace = createParser("\\s+", { m -> MusicalElement in
   Simple.Space
 })
 
+let parseTie = createParser("-", { m -> MusicalElement in
+  Simple.Tie
+})
+
 let parseLineBreak = createParser("\n", { m -> MusicalElement in
   Simple.LineBreak
 })
+
+let parseVoiceId = createParser("^\\[V:\\s*(\\w+)\\]", { m -> MusicalElement in
+  VoiceId(id: m[1].match)
+})
+
+public let parsePitch = createParser("(\\^{0,2}|_{0,2}|=?)([a-g]|[A-G])([',]*)", { m -> Pitch in
+  var accidental: Accidental?
+  var pitchName: PitchName
+  var offset: Int = 0
+
+  switch m[1].match {
+  case "^^": accidental = .DoubleSharp
+  case "^": accidental = .Sharp
+  case "=": accidental = .Natural
+  case "_": accidental = .Flat
+  case "__": accidental = .DoubleFlat
+  default: accidental = nil
+  }
+
+  switch m[2].match {
+  case "C": pitchName = .C
+  case "c": pitchName = .C; offset = 1
+  case "D": pitchName = .D
+  case "d": pitchName = .D; offset = 1
+  case "E": pitchName = .E
+  case "e": pitchName = .E; offset = 1
+  case "F": pitchName = .F
+  case "f": pitchName = .F; offset = 1
+  case "G": pitchName = .G
+  case "g": pitchName = .G; offset = 1
+  case "A": pitchName = .A
+  case "a": pitchName = .A; offset = 1
+  case "B": pitchName = .B
+  case "b": pitchName = .B; offset = 1
+  default: pitchName = .C
+  }
+
+  offset += count(filter(m[3].match, { $0 == "'" }))
+  offset -= count(filter(m[3].match, { $0 == "," }))
+
+  return Pitch(
+    name: pitchName,
+    accidental: accidental,
+    offset: offset)
+})
+
+public let parseNoteLength = createParser("(\\d*)/(\\d+)", { m -> NoteLength in
+  var num: Int
+  if m[1].match.isEmpty {
+    num = 1
+  } else {
+    num = m[1].match.toInt()!
+  }
+
+  var den: Int
+  if m[2].match.isEmpty {
+    den = 1
+  } else {
+    den = m[2].match.toInt()!
+  }
+
+  return NoteLength(numerator: num, denominator: den)
+}) || createParser("(\\d*)(/*)", { m -> NoteLength in
+  var num: Int
+  if m[1].match.isEmpty {
+    num = 1
+  } else {
+    num = m[1].match.toInt()!
+  }
+
+  var den = 1
+  for i in 0..<count(m[2].match) {
+    den *= 2
+  }
+
+  return NoteLength(numerator: num, denominator: den)
+})
+
+public let parseNote = { (s: String) -> (MusicalElement?, String) in
+  let (pitchOpt, lengthOpt, rest) = (parsePitch && parseNoteLength)(s)
+  var note: Note?
+  if let pitch = pitchOpt, length = lengthOpt {
+    note = Note(length: length, pitch: pitch)
+  } else {
+    note = nil
+  }
+
+  return (note, rest)
+}
+
+let parseNoteAndTie = parseNote && parseTie
+
+public let parseRest = { (s: String) -> (MusicalElement?, String) in
+  let (lengthOpt, rest) = (eatPattern("z") &> parseNoteLength)(s)
+  var r: Rest?
+  if let length = lengthOpt {
+    r = Rest(length: length)
+  } else {
+    r = nil
+  }
+  return (r, rest)
+}
+
+public let parseMultiMeasureRest = createParser("Z(\\d*)", { m -> MusicalElement in
+  MultiMeasureRest(num: m[1].match.toInt()!)
+})
+
+//
+//public let parseChord = createParser("", { m -> MusicalElement in
+//
+//})
+//
+//public let parseTuplet = createParser("", { m -> MusicalElement in
+//
+//})
 
 // parse string in subset of ABC notation to tune
 public class ABCParser {

@@ -19,6 +19,7 @@
 		DE0B65821B9520E00045CA5C /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65811B9520E00045CA5C /* ParserTests.swift */; };
 		DE0B65891B9736EB0045CA5C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65881B9736EB0045CA5C /* String.swift */; };
 		DE0B658D1B9757040045CA5C /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B658C1B9757040045CA5C /* StringTests.swift */; };
+		DE603A9F1B9DD8520059A8CD /* song.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE603A9D1B9DD83D0059A8CD /* song.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		DE0B65811B9520E00045CA5C /* ParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
 		DE0B65881B9736EB0045CA5C /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		DE0B658C1B9757040045CA5C /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
+		DE603A9D1B9DD83D0059A8CD /* song.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = song.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				DE0B65811B9520E00045CA5C /* ParserTests.swift */,
+				DE603A9D1B9DD83D0059A8CD /* song.txt */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE603A9F1B9DD8520059A8CD /* song.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

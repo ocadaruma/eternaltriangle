@@ -7,8 +7,16 @@
 //
 
 import Foundation
+import XCTest
 import EternalTriangle
 
-class ParserTests {
-  
+class ParserTests: XCTestCase {
+  func testParse() {
+    let path = NSBundle(forClass: ParserTests.self).pathForResource("song", ofType: "txt")!
+    let string = String(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)!
+//    let parser = ABCParser(string: string)
+//    let tune = parser.parse()!
+
+    parseNoteLength("2/4")
+  }
 }

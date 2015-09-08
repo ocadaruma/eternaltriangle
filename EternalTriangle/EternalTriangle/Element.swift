@@ -32,9 +32,17 @@ public struct Rest: HasLength {
   public let length: NoteLength
 }
 
+public struct MultiMeasureRest : MusicalElement {
+  public let num: Int
+}
+
 public struct Chord : HasLength {
   public let length: NoteLength
   public let pitches: [Pitch]
+}
+
+public struct VoiceId : MusicalElement {
+  public let id: String
 }
 
 public struct Tuplet : MusicalElement {

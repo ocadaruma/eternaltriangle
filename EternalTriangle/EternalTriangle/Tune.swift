@@ -14,20 +14,20 @@ public struct Voice {
 }
 
 public struct TuneHeader {
-  let tuneTitle: TuneTitle
-  let composer: Composer?
-  let meter: Meter
-  let unitNoteLength: UnitNoteLength
-  let tempo: Tempo
-  let key: Key
-  let voiceHeaders: [VoiceHeader]
+  public let tuneTitle: TuneTitle
+  public let composer: Composer?
+  public let meter: Meter
+  public let unitNoteLength: UnitNoteLength
+  public let tempo: Tempo
+  public let key: Key
+  public let voiceHeaders: [VoiceHeader]
 }
 
 public struct TuneBody {
-  let voices: [Voice]
+  public let voices: [Voice]
 }
 
 public struct Tune {
-  let tuneHeader: TuneHeader
-  let tuneBody: TuneBody
+  public let tuneHeader: TuneHeader
+  public let tuneBody: TuneBody
 }

@@ -32,13 +32,13 @@ public extension String {
       var matches: [MatchResult] = []
       for i in 0..<n {
         let r = m.rangeAtIndex(i)
-        if r.length > 0 {
+        if r.location != NSNotFound {
           let start = advance(self.startIndex, r.location)
           let end = advance(start, r.length)
           let range = start..<end
 
           let result = MatchResult(
-            match: self.substringWithRange(self.rangeOfComposedCharacterSequencesForRange(range)),
+            match: self.substringWithRange(range),
             range: range)
 
           matches.append(result)

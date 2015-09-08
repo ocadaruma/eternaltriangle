@@ -19,7 +19,7 @@ public enum Accidental {
 public struct Pitch {
   public let name: PitchName
   public let accidental: Accidental?
-  public let octave: Int
+  public let offset: Int
 }
 
 public enum UnitDenominator: Int {
