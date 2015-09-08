@@ -57,7 +57,21 @@ func && <T, U, V> (f: T -> (U?, T), g: T -> (V?, T)) -> T -> (U?, V?, T) {
   }
 }
 
+func && <T, U, V> (f: T -> (U?, T), g: T -> ([V], T)) -> T -> (U?, [V], T) {
+  return { a -> (U?, [V], T) in
+    let (fR, rest) = f(a)
+
+    switch fR {
+    case .Some(let r):
+      let (gR, gRest) = g(rest)
+      return (r, gR, gRest)
+    case .None: return (nil, [], rest)
+    }
+  }
+}
+
 infix operator &> { associativity left }
+infix operator &< { associativity left }
 
 func &> <T, U, V> (f: T -> (U?, T), g: T -> (V?, T)) -> T -> (V?, T) {
   return { a -> (V?, T) in
@@ -80,6 +94,83 @@ func &> <T, U> (f: T -> (Bool, T), g: T -> (U?, T)) -> T -> (U?, T) {
       return (gR, gRest)
     } else {
       return (nil, rest)
+    }
+  }
+}
+
+func &> <T, U> (f: T -> (Bool, T), g: T -> ([U], T)) -> T -> ([U], T) {
+  return { a -> ([U], T) in
+    let (fR, rest) = f(a)
+    if fR {
+      let (gR, gRest) = g(rest)
+      return (gR, gRest)
+    } else {
+      return ([], rest)
+    }
+  }
+}
+
+func &< <T, U> (f: T -> (U?, T), g: T -> (Bool, T)) -> T -> (U?, T) {
+  return { a -> (U?, T) in
+    let (fR, rest) = f(a)
+
+    switch fR {
+    case .Some(let r):
+      let (gR, gRest) = g(rest)
+      return (gR ? r : nil, gRest)
+    case .None: return (nil, rest)
+    }
+  }
+}
+
+func &< <T, U> (f: T -> ([U], T), g: T -> (Bool, T)) -> T -> ([U], T) {
+  return { a -> ([U], T) in
+    let (fR, rest) = f(a)
+
+    if fR.isEmpty {
+      return ([], rest)
+    } else {
+      let (gR, gRest) = g(rest)
+      return (gR ? fR : [], gRest)
+    }
+  }
+}
+
+public func repeat<T, U>(f: T -> (U?, T)) -> T -> ([U], T) {
+  return { a -> ([U], T) in
+    var fR: U?
+    var rest: T = a
+    var result: [U] = []
+    do {
+      (fR, rest) = f(rest)
+      if let r = fR {
+        result.append(r)
+      }
+    } while (fR != nil)
+    return (result, rest)
+  }
+}
+
+public func repeat<T, U>(f: T -> (U?, T), n: Int) -> T -> ([U], T) {
+  return { a -> ([U], T) in
+    var fR: U?
+    var rest: T = a
+    var result: [U] = []
+
+    for i in 0..<n {
+      (fR, rest) = f(rest)
+      if let r = fR {
+        result.append(r)
+      }
+      if fR == nil {
+        break
+      }
+    }
+
+    if count(result) == n {
+      return (result, rest)
+    } else {
+      return ([], a)
     }
   }
 }
@@ -314,14 +405,36 @@ public let parseMultiMeasureRest = createParser("Z(\\d*)", { m -> MusicalElement
   MultiMeasureRest(num: m[1].match.toInt()!)
 })
 
-//
-//public let parseChord = createParser("", { m -> MusicalElement in
-//
-//})
-//
-//public let parseTuplet = createParser("", { m -> MusicalElement in
-//
-//})
+public let parseChord = { (s: String) -> (MusicalElement?, String) in
+  let (pitches, rest) = (eatPattern("\\[") &> repeat(parsePitch) &< eatPattern("\\]"))(s)
+  if pitches.isEmpty {
+    return (nil, s)
+  } else {
+    let (length, lRest) = parseNoteLength(rest)
+    if let l = length {
+      return (Chord(length: l, pitches: pitches), lRest)
+    } else {
+      return (nil, s)
+    }
+  }
+}
+
+public let parseTuplet = { (s: String) -> (MusicalElement?, String) in
+  let (nOpt, rest) = (createParser("\\(([2-9])", { m -> Int in
+    m[1].match.toInt()!
+  }))(s)
+
+  if let n = nOpt {
+    let (elements, eR) = repeat(parseChord || parseNote || parseRest, n)(rest)
+    if elements.isEmpty {
+      return (nil, s)
+    } else {
+      return (Tuplet(notes: n, inTimeOf: nil, elements: elements.map { $0 as! HasLength }), eR)
+    }
+  } else {
+    return (nil, s)
+  }
+}
 
 // parse string in subset of ABC notation to tune
 public class ABCParser {

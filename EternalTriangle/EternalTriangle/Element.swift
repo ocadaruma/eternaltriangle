@@ -47,7 +47,7 @@ public struct VoiceId : MusicalElement {
 
 public struct Tuplet : MusicalElement {
   public let notes: Int
-  public let inTimeOf: Int? = nil
+  public let inTimeOf: Int?
   static let defaultTime: Int = 3
 
   public let elements: [HasLength]

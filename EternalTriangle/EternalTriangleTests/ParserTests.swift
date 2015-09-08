@@ -17,6 +17,6 @@ class ParserTests: XCTestCase {
 //    let parser = ABCParser(string: string)
 //    let tune = parser.parse()!
 
-    parseNoteLength("2/4")
+    parseTuplet("(2ab")
   }
 }

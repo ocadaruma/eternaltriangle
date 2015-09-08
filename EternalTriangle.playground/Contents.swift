@@ -7,3 +7,7 @@ var str = "Hello, playground"
 let s = "__A',,2/3"
 let m = s.matchesWithPattern("(\\^{0,2}|_{0,2}|=?)([a-g]|[A-G])([',]*)(\\d*(?:/\\d+)?)")
 m[3].match
+
+let (t, st) = parseTuplet("(2abc")
+let tt = t! as! Tuplet
+st
