@@ -166,4 +166,8 @@ class ParserTests: XCTestCase {
     XCTAssertEqual(voice2.elements[26] as! Simple, .BarLine)
     XCTAssertEqual(voice2.elements[27] as! Simple, .LineBreak)
   }
+
+  func testParseSimpleSong() {
+    
+  }
 }

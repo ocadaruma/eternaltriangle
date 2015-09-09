@@ -136,7 +136,7 @@ func &< <T, U> (f: T -> ([U], T), g: T -> (Bool, T)) -> T -> ([U], T) {
   }
 }
 
-public func repeat<T, U>(f: T -> (U?, T)) -> T -> ([U], T) {
+func repeat<T, U>(f: T -> (U?, T)) -> T -> ([U], T) {
   return { a -> ([U], T) in
     var fR: U?
     var rest: T = a
@@ -151,7 +151,18 @@ public func repeat<T, U>(f: T -> (U?, T)) -> T -> ([U], T) {
   }
 }
 
-public func repeat<T, U>(f: T -> (U?, T), n: Int) -> T -> ([U], T) {
+func repeat<T>(f: T -> (Bool, T)) -> T -> (Bool, T) {
+  return { a -> (Bool, T) in
+    var rest: T = a
+    var result: Bool = false
+    do {
+      (result, rest) = f(rest)
+    } while (result)
+    return (result, rest)
+  }
+}
+
+func repeat<T, U>(f: T -> (U?, T), n: Int) -> T -> ([U], T) {
   return { a -> ([U], T) in
     var fR: U?
     var rest: T = a
@@ -177,19 +188,19 @@ public func repeat<T, U>(f: T -> (U?, T), n: Int) -> T -> ([U], T) {
 
 // parsers for header
 
-public let parseReference = createParser("^X:\\s*(\\d+)$\n?", { m -> Header in
+let parseReference = createParser("^X:\\s*(\\d+)$\n?", { m -> Header in
   Reference(number: m[1].match.toInt()!)
 })
 
-public let parseTuneTitle = createParser("^T:\\s*(.+)$\n?", { m -> Header in
+let parseTuneTitle = createParser("^T:\\s*(.+)$\n?", { m -> Header in
   TuneTitle(title: m[1].match)
 })
 
-public let parseComposer = createParser("^C:\\s*(.+)$\n?", { m -> Header in
+let parseComposer = createParser("^C:\\s*(.+)$\n?", { m -> Header in
   Composer(name: m[1].match)
 })
 
-public let parseMeter = createParser("^M:\\s*((?:\\d+/\\d+)|C\\||C)$\n?", { matches -> Header in
+let parseMeter = createParser("^M:\\s*((?:\\d+/\\d+)|C\\||C)$\n?", { matches -> Header in
   var (num, den) = (4, 4)
   let body = matches[1].match
   switch body {
@@ -205,12 +216,12 @@ public let parseMeter = createParser("^M:\\s*((?:\\d+/\\d+)|C\\||C)$\n?", { matc
   return Meter(numerator: num, denominator: den)
 })
 
-public let parseUnitNoteLength = createParser("^L:\\s*1/(\\d+)$\n?", { m -> Header in
+let parseUnitNoteLength = createParser("^L:\\s*1/(\\d+)$\n?", { m -> Header in
   let den = m[1].match.toInt()!
   return UnitNoteLength(denominator: UnitDenominator(rawValue: den) ?? .Quarter)
 })
 
-public let parseTempo = createParser("^Q:\\s*(\\d+)/(\\d+)=(\\d+)$\n?", { m -> Header in
+let parseTempo = createParser("^Q:\\s*(\\d+)/(\\d+)=(\\d+)$\n?", { m -> Header in
   let num = m[1].match.toInt()!
   let den = m[2].match.toInt()!
   let bpm = m[3].match.toInt()!
@@ -218,7 +229,7 @@ public let parseTempo = createParser("^Q:\\s*(\\d+)/(\\d+)=(\\d+)$\n?", { m -> H
   return Tempo(bpm: bpm, inLength: NoteLength(numerator: num, denominator: den))
 })
 
-public let parseKey = createParser("^K:\\s*([ABCDEFG][#b]?m?)$\n?", { m -> Header in
+let parseKey = createParser("^K:\\s*([ABCDEFG][#b]?m?)$\n?", { m -> Header in
   var sig: KeySignature
 
   switch m[1].match {
@@ -243,7 +254,7 @@ public let parseKey = createParser("^K:\\s*([ABCDEFG][#b]?m?)$\n?", { m -> Heade
   return Key(keySignature: sig)
 })
 
-public let parseVoiceHeader = createParser("^V:\\s*(\\w+)\\s*(?:clef=(\\w+))?$\n?", { m -> Header in
+let parseVoiceHeader = createParser("^V:\\s*(\\w+)\\s*(?:clef=(\\w+))?$\n?", { m -> Header in
   let id = m[1].match
   if m.count < 3 {
     return VoiceHeader(id: id, clef: Clef(clefName: .Treble))
@@ -253,17 +264,9 @@ public let parseVoiceHeader = createParser("^V:\\s*(\\w+)\\s*(?:clef=(\\w+))?$\n
   }
 })
 
-public func eatComment(string: String) -> String {
-  let scanner = StringScanner(string: string)
-  let matches = scanner.scan("^%.*$\n?")
-  return scanner.result
-}
+let eatComment = eatPattern("^%.*$\n?")
 
-public func eatEmptyLine(string: String) -> String {
-  let scanner = StringScanner(string: string)
-  let matches = scanner.scan("^\\s.*$\n?")
-  return scanner.result
-}
+let eatEmptyLine = eatPattern("^\\s.*$\n?")
 
 let parseHeader =
 parseReference ||
@@ -309,7 +312,7 @@ let parseVoiceId = createParser("^\\[V:\\s*(\\w+)\\]", { m -> MusicalElement in
   VoiceId(id: m[1].match)
 })
 
-public let parsePitch = createParser("(\\^{0,2}|_{0,2}|=?)([a-g]|[A-G])([',]*)", { m -> Pitch in
+let parsePitch = createParser("(\\^{0,2}|_{0,2}|=?)([a-g]|[A-G])([',]*)", { m -> Pitch in
   var accidental: Accidental?
   var pitchName: PitchName
   var offset: Int = 0
@@ -350,7 +353,7 @@ public let parsePitch = createParser("(\\^{0,2}|_{0,2}|=?)([a-g]|[A-G])([',]*)",
     offset: offset)
 })
 
-public let parseNoteLength = createParser("(\\d*)/(\\d+)", { m -> NoteLength in
+let parseNoteLength = createParser("(\\d*)/(\\d+)", { m -> NoteLength in
   var num: Int
   if m[1].match.isEmpty {
     num = 1
@@ -382,7 +385,7 @@ public let parseNoteLength = createParser("(\\d*)/(\\d+)", { m -> NoteLength in
   return NoteLength(numerator: num, denominator: den)
 })
 
-public let parseNote = { (s: String) -> (MusicalElement?, String) in
+let parseNote = { (s: String) -> (MusicalElement?, String) in
   let (pitchOpt, lengthOpt, rest) = (parsePitch && parseNoteLength)(s)
   var note: Note?
   if let pitch = pitchOpt, length = lengthOpt {
@@ -396,7 +399,7 @@ public let parseNote = { (s: String) -> (MusicalElement?, String) in
 
 let parseNoteAndTie = parseNote && parseTie
 
-public let parseRest = { (s: String) -> (MusicalElement?, String) in
+let parseRest = { (s: String) -> (MusicalElement?, String) in
   let (lengthOpt, rest) = (eatPattern("z") &> parseNoteLength)(s)
   var r: Rest?
   if let length = lengthOpt {
@@ -407,11 +410,11 @@ public let parseRest = { (s: String) -> (MusicalElement?, String) in
   return (r, rest)
 }
 
-public let parseMultiMeasureRest = createParser("Z(\\d*)", { m -> MusicalElement in
+let parseMultiMeasureRest = createParser("Z(\\d*)", { m -> MusicalElement in
   MultiMeasureRest(num: m[1].match.toInt()!)
 })
 
-public let parseChord = { (s: String) -> (MusicalElement?, String) in
+let parseChord = { (s: String) -> (MusicalElement?, String) in
   let (pitches, rest) = (eatPattern("\\[") &> repeat(parsePitch) &< eatPattern("\\]"))(s)
   if pitches.isEmpty {
     return (nil, s)
@@ -425,7 +428,7 @@ public let parseChord = { (s: String) -> (MusicalElement?, String) in
   }
 }
 
-public func parseTuplet<T : HasLength>(s: String) -> (MusicalElement?, String) {
+func parseTuplet<T : HasLength>(s: String) -> (MusicalElement?, String) {
   let (nOpt, rest) = (createParser("\\(([2-9])", { m -> Int in
     m[1].match.toInt()!
   }))(s)
@@ -442,8 +445,7 @@ public func parseTuplet<T : HasLength>(s: String) -> (MusicalElement?, String) {
   }
 }
 
-let parseElement =
-parseDoubleBarLine ||
+let parseElement = parseDoubleBarLine ||
   parseBarLine ||
   parseSlurStart ||
   parseSlurEnd ||
@@ -453,7 +455,7 @@ parseDoubleBarLine ||
   parseNote ||
   parseRest ||
   parseMultiMeasureRest ||
-parseChord
+  parseChord
 
 // parse string in subset of ABC notation to tune
 public class ABCParser {
@@ -540,8 +542,8 @@ public class ABCParser {
   }
 
   private func parseIter(string: String, headers: [Header], elems: [MusicalElement]) -> Tune {
-    var str = eatComment(string)
-    str = eatEmptyLine(str)
+    var (_, str) = repeat(eatComment)(string)
+    str = repeat(eatEmptyLine)(str).1
 
     if (str.isEmpty) {
       return buildResult(headers, elems: elems)
@@ -560,7 +562,6 @@ public class ABCParser {
         }
       }
 
-      rest = eatComment(rest)
       return parseIter(rest, headers: nextHeaders, elems: nextElements)
     }
   }
