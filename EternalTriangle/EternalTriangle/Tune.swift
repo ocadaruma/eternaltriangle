@@ -14,7 +14,8 @@ public struct Voice {
 }
 
 public struct TuneHeader {
-  public let tuneTitle: TuneTitle
+  public let reference: Reference?
+  public let tuneTitle: TuneTitle?
   public let composer: Composer?
   public let meter: Meter
   public let unitNoteLength: UnitNoteLength

@@ -16,10 +16,21 @@ public enum Accidental {
   case Natural, Flat, Sharp, DoubleFlat, DoubleSharp
 }
 
-public struct Pitch {
+public struct Pitch : Equatable {
   public let name: PitchName
   public let accidental: Accidental?
   public let offset: Int
+  public init(name: PitchName, accidental: Accidental?, offset: Int) {
+    self.name = name
+    self.accidental = accidental
+    self.offset = offset
+  }
+}
+
+public func ==(lhs: Pitch, rhs: Pitch) -> Bool {
+  return lhs.offset == rhs.offset &&
+    lhs.accidental == rhs.accidental &&
+    lhs.name == rhs.name
 }
 
 public enum UnitDenominator: Int {
@@ -32,9 +43,18 @@ public enum UnitDenominator: Int {
   case SixtyFourth = 64
 }
 
-public struct NoteLength {
+public struct NoteLength : Equatable {
   public let numerator: Int
   public let denominator: Int
+  public init(numerator: Int, denominator: Int) {
+    self.numerator = numerator
+    self.denominator = denominator
+  }
+}
+
+public func ==(lhs: NoteLength, rhs: NoteLength) -> Bool {
+  return lhs.numerator == rhs.numerator &&
+    lhs.denominator == rhs.denominator
 }
 
 public enum ClefName : String {
@@ -42,6 +62,13 @@ public enum ClefName : String {
   case Bass = "bass"
 }
 
-public struct Clef {
+public struct Clef : Equatable {
   public let clefName: ClefName
+  public init(clefName: ClefName) {
+    self.clefName = clefName
+  }
+}
+
+public func ==(lhs: Clef, rhs: Clef) -> Bool {
+  return lhs.clefName == rhs.clefName
 }

@@ -253,10 +253,16 @@ public let parseVoiceHeader = createParser("^V:\\s*(\\w+)\\s*(?:clef=(\\w+))?$\n
   }
 })
 
-public func parseComment<T>(string: String) -> (T?, String) {
+public func eatComment(string: String) -> String {
   let scanner = StringScanner(string: string)
   let matches = scanner.scan("^%.*$\n?")
-  return (nil, scanner.result)
+  return scanner.result
+}
+
+public func eatEmptyLine(string: String) -> String {
+  let scanner = StringScanner(string: string)
+  let matches = scanner.scan("^\\s.*$\n?")
+  return scanner.result
 }
 
 let parseHeader =
@@ -419,7 +425,7 @@ public let parseChord = { (s: String) -> (MusicalElement?, String) in
   }
 }
 
-public let parseTuplet = { (s: String) -> (MusicalElement?, String) in
+public func parseTuplet<T : HasLength>(s: String) -> (MusicalElement?, String) {
   let (nOpt, rest) = (createParser("\\(([2-9])", { m -> Int in
     m[1].match.toInt()!
   }))(s)
@@ -429,41 +435,137 @@ public let parseTuplet = { (s: String) -> (MusicalElement?, String) in
     if elements.isEmpty {
       return (nil, s)
     } else {
-      return (Tuplet(notes: n, inTimeOf: nil, elements: elements.map { $0 as! HasLength }), eR)
+      return (Tuplet(notes: n, inTimeOf: nil, elements: elements.map { $0 as! T }), eR)
     }
   } else {
     return (nil, s)
   }
 }
 
+let parseElement =
+parseDoubleBarLine ||
+  parseBarLine ||
+  parseSlurStart ||
+  parseSlurEnd ||
+  parseLineBreak ||
+  parseSpace ||
+  parseVoiceId ||
+  parseNote ||
+  parseRest ||
+  parseMultiMeasureRest ||
+parseChord
+
 // parse string in subset of ABC notation to tune
 public class ABCParser {
   private let string: String
+  private static let defaultVoiceId = "default"
 
   public init(string: String) {
     self.string = string
   }
 
-  private func buildResult(headers: [Header], elems: [MusicalElement]) -> Tune? {
-    return nil
+  private func buildTuneHeader(headers: [Header]) -> TuneHeader {
+    var reference: Reference? = nil
+    var tuneTitle: TuneTitle? = nil
+    var composer: Composer? = nil
+    var meter: Meter? = nil
+    var unitNoteLength: UnitNoteLength? = nil
+    var tempo: Tempo? = nil
+    var key: Key? = nil
+    var voiceHeaders: [VoiceHeader] = []
+
+    for h in headers {
+      switch h {
+      case let r as Reference: reference = r
+      case let t as TuneTitle: tuneTitle = t
+      case let c as Composer: composer = c
+      case let m as Meter: meter = m
+      case let u as UnitNoteLength: unitNoteLength = u
+      case let t as Tempo: tempo = t
+      case let k as Key: key = k
+      case let v as VoiceHeader: voiceHeaders.append(v)
+      default: ()
+      }
+    }
+
+    if voiceHeaders.isEmpty {
+      voiceHeaders.append(VoiceHeader(id: ABCParser.defaultVoiceId, clef: Clef(clefName: .Treble)))
+    }
+
+    return TuneHeader(
+      reference: reference,
+      tuneTitle: tuneTitle,
+      composer: composer,
+      meter: meter ?? Meter(numerator: 4, denominator: 4),
+      unitNoteLength: unitNoteLength ?? UnitNoteLength(denominator: .Quarter),
+      tempo: tempo ?? Tempo(bpm: 120, inLength: NoteLength(numerator: 1, denominator: 1)),
+      key: key ?? Key(keySignature: .Zero),
+      voiceHeaders: voiceHeaders)
   }
 
-  private func parseIter(str: String, headers: [Header], elems: [MusicalElement]) -> Tune? {
+  private func buildTuneBody(elems: [MusicalElement]) -> TuneBody {
+    var voiceIdElementsMap: [String : [MusicalElement]] = [:]
+    var currentVoiceId = ABCParser.defaultVoiceId
+    voiceIdElementsMap[currentVoiceId] = []
+
+    for m in elems {
+      switch m {
+      case let v as VoiceId:
+        currentVoiceId = v.id
+        if voiceIdElementsMap[currentVoiceId] == nil {
+          voiceIdElementsMap[currentVoiceId] = []
+        }
+
+      default: voiceIdElementsMap[currentVoiceId]?.append(m)
+      }
+    }
+
+    if voiceIdElementsMap[ABCParser.defaultVoiceId]!.isEmpty {
+      voiceIdElementsMap.removeValueForKey(ABCParser.defaultVoiceId)
+    }
+
+    var voices: [Voice] = []
+    for (id, elements) in voiceIdElementsMap {
+      voices.append(Voice(id: id, elements: elements))
+    }
+
+    return TuneBody(voices: voices)
+  }
+
+  private func buildResult(headers: [Header], elems: [MusicalElement]) -> Tune {
+    let header = buildTuneHeader(headers)
+    let body = buildTuneBody(elems)
+
+    return Tune(tuneHeader: header, tuneBody: body)
+  }
+
+  private func parseIter(string: String, headers: [Header], elems: [MusicalElement]) -> Tune {
+    var str = eatComment(string)
+    str = eatEmptyLine(str)
+
     if (str.isEmpty) {
       return buildResult(headers, elems: elems)
     } else {
       var nextHeaders = headers
-      let (hOpt, rest) = parseHeader(str)
+      var nextElements = elems
+      var (hOpt, rest) = parseHeader(str)
+
       if let h = hOpt {
         nextHeaders.append(h)
       } else {
-
+        let (es, eRest) = repeat(parseElement)(str)
+        rest = eRest
+        if !es.isEmpty {
+          nextElements.extend(es)
+        }
       }
-      return parseIter(rest, headers: nextHeaders, elems: elems)
+
+      rest = eatComment(rest)
+      return parseIter(rest, headers: nextHeaders, elems: nextElements)
     }
   }
 
-  public func parse() -> Tune? {
+  public func parse() -> Tune {
     return parseIter(string, headers: [], elems: [])
   }
 }

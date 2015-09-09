@@ -12,28 +12,48 @@ public protocol Header { }
 
 public struct Reference : Header {
   public let number: Int
+  public init(number: Int) {
+    self.number = number
+  }
 }
 
 public struct TuneTitle : Header {
   public let title: String
+  public init(title: String) {
+    self.title = title
+  }
 }
 
 public struct Composer : Header {
   public let name: String
+  public init(name: String) {
+    self.name = name
+  }
 }
 
 public struct Meter : Header {
   public let numerator: Int
   public let denominator: Int
+  public init(numerator: Int, denominator: Int) {
+    self.numerator = numerator
+    self.denominator = denominator
+  }
 }
 
 public struct UnitNoteLength : Header {
   public let denominator: UnitDenominator
+  public init(denominator: UnitDenominator) {
+    self.denominator = denominator
+  }
 }
 
 public struct Tempo : Header {
   public let bpm: Int
   public let inLength: NoteLength
+  public init(bpm: Int, inLength: NoteLength) {
+      self.bpm = bpm
+      self.inLength = inLength
+  }
 }
 
 public enum KeySignature {
@@ -44,9 +64,16 @@ public enum KeySignature {
 
 public struct Key : Header {
   public let keySignature: KeySignature
+  public init(keySignature: KeySignature) {
+    self.keySignature = keySignature
+  }
 }
 
 public struct VoiceHeader : Header {
   public let id: String
   public let clef: Clef
+  public init(id: String, clef: Clef) {
+    self.id = id
+    self.clef = clef
+  }
 }

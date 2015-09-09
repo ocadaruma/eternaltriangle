@@ -9,9 +9,7 @@
 import Foundation
 
 public protocol MusicalElement {}
-public protocol HasLength : MusicalElement {
-  var length: NoteLength { get }
-}
+public protocol HasLength : MusicalElement, Equatable {}
 
 public enum Simple : MusicalElement {
   case BarLine
@@ -23,34 +21,63 @@ public enum Simple : MusicalElement {
   case LineBreak
 }
 
-public struct Note : HasLength {
+public struct Note : HasLength, Equatable {
   public let length: NoteLength
   public let pitch: Pitch
+  public init(length: NoteLength, pitch: Pitch) {
+    self.length = length
+    self.pitch = pitch
+  }
 }
 
-public struct Rest: HasLength {
+public func ==(lhs: Note, rhs: Note) -> Bool {
+  return lhs.length == rhs.length &&
+    lhs.pitch == rhs.pitch
+}
+
+public struct Rest: HasLength, Equatable {
   public let length: NoteLength
+  public init(length: NoteLength) {
+    self.length = length
+  }
 }
 
-public struct MultiMeasureRest : MusicalElement {
+public func ==(lhs: Rest, rhs: Rest) -> Bool {
+  return lhs.length == rhs.length
+}
+
+public struct MultiMeasureRest : MusicalElement, Equatable {
   public let num: Int
 }
 
-public struct Chord : HasLength {
+public func ==(lhs: MultiMeasureRest, rhs: MultiMeasureRest) -> Bool {
+  return lhs.num == rhs.num
+}
+
+public struct Chord : HasLength, Equatable {
   public let length: NoteLength
   public let pitches: [Pitch]
 }
 
-public struct VoiceId : MusicalElement {
+public func ==(lhs: Chord, rhs: Chord) -> Bool {
+  return lhs.length == rhs.length &&
+    lhs.pitches == rhs.pitches
+}
+
+public struct VoiceId : MusicalElement, Equatable {
   public let id: String
 }
 
-public struct Tuplet : MusicalElement {
+public func ==(lhs: VoiceId, rhs: VoiceId) -> Bool {
+  return lhs.id == rhs.id
+}
+
+public struct Tuplet<T : HasLength> : MusicalElement, Equatable {
   public let notes: Int
   public let inTimeOf: Int?
-  static let defaultTime: Int = 3
+  private let defaultTime: Int = 3
 
-  public let elements: [HasLength]
+  public let elements: [T]
 
   public var time: Int {
     get {
@@ -60,9 +87,15 @@ public struct Tuplet : MusicalElement {
         switch notes {
         case 2, 4, 8: return 3
         case 3, 6: return 2
-        default: return Tuplet.defaultTime
+        default: return self.defaultTime
         }
       }
     }
   }
+}
+
+public func == <T : HasLength>(lhs: Tuplet<T>, rhs: Tuplet<T>) -> Bool {
+  return lhs.notes == rhs.notes &&
+    lhs.inTimeOf == rhs.inTimeOf &&
+    lhs.elements == rhs.elements
 }
