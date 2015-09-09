@@ -168,6 +168,43 @@ class ParserTests: XCTestCase {
   }
 
   func testParseSimpleSong() {
-    
+    let parser = ABCParser(string: "|(3ABA (3[c,^e,g,,]zB|")
+    let tune = parser.parse()
+
+    let voice = tune.tuneBody.voices[0]
+
+    XCTAssertEqual(voice.id, "default")
+    XCTAssertEqual(voice.elements[0] as! Simple, .BarLine)
+    let t1 = voice.elements[1] as! Tuplet
+    XCTAssertEqual(t1.time, 2)
+    XCTAssertEqual(t1.notes, 3)
+    XCTAssertEqual(t1.elements[0] as! Note,
+      Note(
+        length: NoteLength(numerator: 1, denominator: 1),
+        pitch: Pitch(name: .A, accidental: nil, offset: 0)))
+    XCTAssertEqual(t1.elements[1] as! Note,
+      Note(
+        length: NoteLength(numerator: 1, denominator: 1),
+        pitch: Pitch(name: .B, accidental: nil, offset: 0)))
+    XCTAssertEqual(t1.elements[2] as! Note,
+      Note(
+        length: NoteLength(numerator: 1, denominator: 1),
+        pitch: Pitch(name: .A, accidental: nil, offset: 0)))
+    XCTAssertEqual(voice.elements[2] as! Simple, .Space)
+    let t2 = voice.elements[3] as! Tuplet
+    XCTAssertEqual(t2.elements[0] as! Chord,
+      Chord(
+        length: NoteLength(numerator: 1, denominator: 1),
+        pitches:
+        [Pitch(name: .C, accidental: nil, offset: 0),
+          Pitch(name: .E, accidental: .Sharp, offset: 0),
+          Pitch(name: .G, accidental: nil, offset: -1)]))
+    XCTAssertEqual(t2.elements[1] as! Rest,
+      Rest(length: NoteLength(numerator: 1, denominator: 1)))
+    XCTAssertEqual(t2.elements[2] as! Note,
+      Note(
+        length: NoteLength(numerator: 1, denominator: 1),
+        pitch: Pitch(name: .B, accidental: nil, offset: 0)))
+    XCTAssertEqual(voice.elements[4] as! Simple, .BarLine)
   }
 }

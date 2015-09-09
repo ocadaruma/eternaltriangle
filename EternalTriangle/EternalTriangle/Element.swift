@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol MusicalElement {}
-public protocol HasLength : MusicalElement, Equatable {}
+public protocol TupletMember : MusicalElement {}
 
 public enum Simple : MusicalElement {
   case BarLine
@@ -21,7 +21,7 @@ public enum Simple : MusicalElement {
   case LineBreak
 }
 
-public struct Note : HasLength, Equatable {
+public struct Note : TupletMember, Equatable {
   public let length: NoteLength
   public let pitch: Pitch
   public init(length: NoteLength, pitch: Pitch) {
@@ -35,7 +35,7 @@ public func ==(lhs: Note, rhs: Note) -> Bool {
     lhs.pitch == rhs.pitch
 }
 
-public struct Rest: HasLength, Equatable {
+public struct Rest: TupletMember, Equatable {
   public let length: NoteLength
   public init(length: NoteLength) {
     self.length = length
@@ -54,9 +54,13 @@ public func ==(lhs: MultiMeasureRest, rhs: MultiMeasureRest) -> Bool {
   return lhs.num == rhs.num
 }
 
-public struct Chord : HasLength, Equatable {
+public struct Chord : TupletMember, Equatable {
   public let length: NoteLength
   public let pitches: [Pitch]
+  public init(length: NoteLength, pitches: [Pitch]) {
+    self.length = length
+    self.pitches = pitches
+  }
 }
 
 public func ==(lhs: Chord, rhs: Chord) -> Bool {
@@ -72,12 +76,12 @@ public func ==(lhs: VoiceId, rhs: VoiceId) -> Bool {
   return lhs.id == rhs.id
 }
 
-public struct Tuplet<T : HasLength> : MusicalElement, Equatable {
+public struct Tuplet : MusicalElement {
   public let notes: Int
   public let inTimeOf: Int?
   private let defaultTime: Int = 3
 
-  public let elements: [T]
+  public let elements: [TupletMember]
 
   public var time: Int {
     get {
@@ -92,10 +96,4 @@ public struct Tuplet<T : HasLength> : MusicalElement, Equatable {
       }
     }
   }
-}
-
-public func == <T : HasLength>(lhs: Tuplet<T>, rhs: Tuplet<T>) -> Bool {
-  return lhs.notes == rhs.notes &&
-    lhs.inTimeOf == rhs.inTimeOf &&
-    lhs.elements == rhs.elements
 }

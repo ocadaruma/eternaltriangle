@@ -428,7 +428,7 @@ let parseChord = { (s: String) -> (MusicalElement?, String) in
   }
 }
 
-func parseTuplet<T : HasLength>(s: String) -> (MusicalElement?, String) {
+func parseTuplet(s: String) -> (MusicalElement?, String) {
   let (nOpt, rest) = (createParser("\\(([2-9])", { m -> Int in
     m[1].match.toInt()!
   }))(s)
@@ -438,14 +438,15 @@ func parseTuplet<T : HasLength>(s: String) -> (MusicalElement?, String) {
     if elements.isEmpty {
       return (nil, s)
     } else {
-      return (Tuplet(notes: n, inTimeOf: nil, elements: elements.map { $0 as! T }), eR)
+      return (Tuplet(notes: n, inTimeOf: nil, elements: elements.map { $0 as! TupletMember }), eR)
     }
   } else {
     return (nil, s)
   }
 }
 
-let parseElement = parseDoubleBarLine ||
+let parseElement = parseTuplet ||
+  parseDoubleBarLine ||
   parseBarLine ||
   parseSlurStart ||
   parseSlurEnd ||
@@ -456,6 +457,7 @@ let parseElement = parseDoubleBarLine ||
   parseRest ||
   parseMultiMeasureRest ||
   parseChord
+
 
 // parse string in subset of ABC notation to tune
 public class ABCParser {
