@@ -11,6 +11,3 @@ m[3].match
 
 "".isEmpty
 
-let (ns, _) = repeat(parseNote)("b2e'2")
-let n = ns[1] as! Note
-n.pitch

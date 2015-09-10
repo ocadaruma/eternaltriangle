@@ -15,7 +15,7 @@ class ParserTests: XCTestCase {
     let path = NSBundle(forClass: ParserTests.self).pathForResource("song", ofType: "txt")!
     let string = String(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)!
     let parser = ABCParser(string: string)
-    let tune = parser.parse()
+    let tune = parser.parse().tune!
 
     //tune header
     let header = tune.tuneHeader
@@ -169,7 +169,7 @@ class ParserTests: XCTestCase {
 
   func testParseSimpleSong() {
     let parser = ABCParser(string: "|(3ABA (3[c,^e,g,,]zB|")
-    let tune = parser.parse()
+    let tune = parser.parse().tune!
 
     let voice = tune.tuneBody.voices[0]
 
@@ -206,5 +206,12 @@ class ParserTests: XCTestCase {
         length: NoteLength(numerator: 1, denominator: 1),
         pitch: Pitch(name: .B, accidental: nil, offset: 0)))
     XCTAssertEqual(voice.elements[4] as! Simple, .BarLine)
+  }
+
+  func testSyntaxError() {
+    let parser = ABCParser(string: "ABCD~j~")
+    let tune = parser.parse()
+    println(tune.errorMessage)
+    XCTAssert(tune.tune == nil)
   }
 }

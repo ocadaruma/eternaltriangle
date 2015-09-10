@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		DE0B64DE1B947D5E0045CA5C /* EternalTriangle.h in Headers */ = {isa = PBXBuildFile; fileRef = DE0B64DD1B947D5E0045CA5C /* EternalTriangle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE0B65331B94848A0045CA5C /* StringScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65321B94848A0045CA5C /* StringScanner.swift */; };
-		DE0B65681B94879C0045CA5C /* EternalTriangle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0B64D81B947D5D0045CA5C /* EternalTriangle.framework */; };
 		DE0B65701B9487BA0045CA5C /* StringScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B656F1B9487BA0045CA5C /* StringScannerTests.swift */; };
 		DE0B65731B948A370045CA5C /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65721B948A370045CA5C /* Core.swift */; };
 		DE0B65751B948DA90045CA5C /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65741B948DA90045CA5C /* Element.swift */; };
@@ -20,6 +19,12 @@
 		DE0B65891B9736EB0045CA5C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65881B9736EB0045CA5C /* String.swift */; };
 		DE0B658D1B9757040045CA5C /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B658C1B9757040045CA5C /* StringTests.swift */; };
 		DE603A9F1B9DD8520059A8CD /* song.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE603A9D1B9DD83D0059A8CD /* song.txt */; };
+		DE603AA31B9FF8680059A8CD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE603AA21B9FF8680059A8CD /* AudioToolbox.framework */; };
+		DE603AA41B9FF8890059A8CD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE603AA21B9FF8680059A8CD /* AudioToolbox.framework */; };
+		DE603AA71BA074D20059A8CD /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE603AA61BA074D20059A8CD /* Sequencer.swift */; };
+		DE603AA91BA10C0F0059A8CD /* CUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE603AA81BA10C0F0059A8CD /* CUtility.swift */; };
+		DE603AAB1BA10DD40059A8CD /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE603AAA1BA10DD40059A8CD /* Renderer.swift */; };
+		DEFE6EBA1BA1B57600BA76B4 /* ABCParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE6EB91BA1B57600BA76B4 /* ABCParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +54,11 @@
 		DE0B65881B9736EB0045CA5C /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		DE0B658C1B9757040045CA5C /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		DE603A9D1B9DD83D0059A8CD /* song.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = song.txt; sourceTree = "<group>"; };
+		DE603AA21B9FF8680059A8CD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		DE603AA61BA074D20059A8CD /* Sequencer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
+		DE603AA81BA10C0F0059A8CD /* CUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CUtility.swift; sourceTree = "<group>"; };
+		DE603AAA1BA10DD40059A8CD /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		DEFE6EB91BA1B57600BA76B4 /* ABCParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABCParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE603AA41B9FF8890059A8CD /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE0B65681B94879C0045CA5C /* EternalTriangle.framework in Frameworks */,
+				DE603AA31B9FF8680059A8CD /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +84,7 @@
 		DE0B64CE1B947D5D0045CA5C = {
 			isa = PBXGroup;
 			children = (
+				DE603AA21B9FF8680059A8CD /* AudioToolbox.framework */,
 				DE0B64DA1B947D5D0045CA5C /* Source */,
 				DE0B65631B94879C0045CA5C /* Tests */,
 				DE0B64D91B947D5D0045CA5C /* Products */,
@@ -91,6 +103,8 @@
 		DE0B64DA1B947D5D0045CA5C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				DE603AA11B9FF7F40059A8CD /* Render */,
+				DE603AA01B9FF7DB0059A8CD /* Playback */,
 				DE0B65311B94844E0045CA5C /* Core */,
 				DE0B65301B9484450045CA5C /* Misc */,
 				DE0B64DD1B947D5E0045CA5C /* EternalTriangle.h */,
@@ -113,6 +127,7 @@
 			children = (
 				DE0B65321B94848A0045CA5C /* StringScanner.swift */,
 				DE0B65881B9736EB0045CA5C /* String.swift */,
+				DE603AA81BA10C0F0059A8CD /* CUtility.swift */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -125,6 +140,7 @@
 				DE0B65761B9499FE0045CA5C /* Parser.swift */,
 				DE0B65791B949D590045CA5C /* Header.swift */,
 				DE0B657C1B94A1180045CA5C /* Tune.swift */,
+				DEFE6EB91BA1B57600BA76B4 /* ABCParser.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -164,6 +180,22 @@
 				DE603A9D1B9DD83D0059A8CD /* song.txt */,
 			);
 			name = Core;
+			sourceTree = "<group>";
+		};
+		DE603AA01B9FF7DB0059A8CD /* Playback */ = {
+			isa = PBXGroup;
+			children = (
+				DE603AA61BA074D20059A8CD /* Sequencer.swift */,
+			);
+			name = Playback;
+			sourceTree = "<group>";
+		};
+		DE603AA11B9FF7F40059A8CD /* Render */ = {
+			isa = PBXGroup;
+			children = (
+				DE603AAA1BA10DD40059A8CD /* Renderer.swift */,
+			);
+			name = Render;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,9 +309,13 @@
 				DE0B65731B948A370045CA5C /* Core.swift in Sources */,
 				DE0B657D1B94A1180045CA5C /* Tune.swift in Sources */,
 				DE0B65771B9499FE0045CA5C /* Parser.swift in Sources */,
+				DE603AA91BA10C0F0059A8CD /* CUtility.swift in Sources */,
 				DE0B65331B94848A0045CA5C /* StringScanner.swift in Sources */,
 				DE0B65891B9736EB0045CA5C /* String.swift in Sources */,
+				DE603AA71BA074D20059A8CD /* Sequencer.swift in Sources */,
 				DE0B657A1B949D590045CA5C /* Header.swift in Sources */,
+				DE603AAB1BA10DD40059A8CD /* Renderer.swift in Sources */,
+				DEFE6EBA1BA1B57600BA76B4 /* ABCParser.swift in Sources */,
 				DE0B65751B948DA90045CA5C /* Element.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
