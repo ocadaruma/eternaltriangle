@@ -25,6 +25,7 @@
 		DE603AA91BA10C0F0059A8CD /* CUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE603AA81BA10C0F0059A8CD /* CUtility.swift */; };
 		DE603AAB1BA10DD40059A8CD /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE603AAA1BA10DD40059A8CD /* Renderer.swift */; };
 		DEFE6EBA1BA1B57600BA76B4 /* ABCParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE6EB91BA1B57600BA76B4 /* ABCParser.swift */; };
+		DEFE6EBD1BA31C7700BA76B4 /* vibraphone.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DEFE6EBC1BA31C7700BA76B4 /* vibraphone.sf2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		DE603AA81BA10C0F0059A8CD /* CUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CUtility.swift; sourceTree = "<group>"; };
 		DE603AAA1BA10DD40059A8CD /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		DEFE6EB91BA1B57600BA76B4 /* ABCParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABCParser.swift; sourceTree = "<group>"; };
+		DEFE6EBC1BA31C7700BA76B4 /* vibraphone.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = vibraphone.sf2; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 		DE603AA01B9FF7DB0059A8CD /* Playback */ = {
 			isa = PBXGroup;
 			children = (
+				DEFE6EBB1BA31C5D00BA76B4 /* Sounds */,
 				DE603AA61BA074D20059A8CD /* Sequencer.swift */,
 			);
 			name = Playback;
@@ -196,6 +199,14 @@
 				DE603AAA1BA10DD40059A8CD /* Renderer.swift */,
 			);
 			name = Render;
+			sourceTree = "<group>";
+		};
+		DEFE6EBB1BA31C5D00BA76B4 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				DEFE6EBC1BA31C7700BA76B4 /* vibraphone.sf2 */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +299,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEFE6EBD1BA31C7700BA76B4 /* vibraphone.sf2 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

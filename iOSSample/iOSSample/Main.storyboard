@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="7WA-cL-O4W">
+            <objects>
+                <viewController storyboardIdentifier="main" id="eI2-Im-CZa" customClass="MainViewController" customModule="iOSSample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VZW-ex-2pT"/>
+                        <viewControllerLayoutGuide type="bottom" id="0zp-hC-rbZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kRL-nv-RQK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etC-n0-GEP">
+                                <rect key="frame" x="16" y="28" width="47" height="30"/>
+                                <state key="normal" title="START">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="start:" destination="eI2-Im-CZa" eventType="touchUpInside" id="5bV-cr-7pU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ASE-jU-0GX">
+                                <rect key="frame" x="543" y="28" width="41" height="30"/>
+                                <state key="normal" title="STOP">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stop:" destination="eI2-Im-CZa" eventType="touchUpInside" id="xQW-wv-isA"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="etC-n0-GEP" firstAttribute="top" secondItem="VZW-ex-2pT" secondAttribute="bottom" constant="8" id="0Ef-6Z-g7S"/>
+                            <constraint firstItem="etC-n0-GEP" firstAttribute="leading" secondItem="kRL-nv-RQK" secondAttribute="leading" constant="16" id="6dN-ne-QxW"/>
+                            <constraint firstItem="ASE-jU-0GX" firstAttribute="top" secondItem="VZW-ex-2pT" secondAttribute="bottom" constant="8" id="CWn-sU-kCp"/>
+                            <constraint firstAttribute="trailing" secondItem="ASE-jU-0GX" secondAttribute="trailing" constant="16" id="vKd-kn-mpb"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="389-23-6RJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="459" y="414"/>
+        </scene>
+    </scenes>
+</document>
