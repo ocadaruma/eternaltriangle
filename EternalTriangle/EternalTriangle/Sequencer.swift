@@ -108,7 +108,7 @@ public class Sequencer {
   }
 
   private func loadSF2Preset(preset: UInt8) {
-    if let bankURL = NSBundle.mainBundle().URLForResource("vibraphone", withExtension: "sf2") {
+    if let bankURL = NSBundle(forClass: Sequencer.self).URLForResource("vibraphone", withExtension: "sf2") {
       var instData = AUSamplerInstrumentData(
         fileURL: Unmanaged.passUnretained(bankURL),
         instrumentType: UInt8(kInstrumentType_DLSPreset),
@@ -123,6 +123,8 @@ public class Sequencer {
         0,
         &instData,
         UInt32(sizeof(AUSamplerInstrumentData))))
+    } else {
+      println("load error")
     }
   }
 
@@ -143,7 +145,7 @@ public class Sequencer {
         note: i,
         velocity: 64,
         releaseVelocity: 0,
-        duration: 1.0)
+        duration: 0.2)
 
       checkError(MusicTrackNewMIDINoteEvent(track, beat, &message))
       beat += 0.5
