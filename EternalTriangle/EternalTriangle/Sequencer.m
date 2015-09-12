@@ -12,13 +12,12 @@
 
 #pragma C function prototype decls
 static void checkError(OSStatus);
-static void musicSequenceCallback(void *,
-                                  MusicSequence,
-                                  MusicTrack,
-                                  MusicTimeStamp,
-                                  const MusicEventUserData*,
-                                  MusicTimeStamp,
-                                  MusicTimeStamp);
+static OSStatus audioUnitCallback(void *,
+                                  AudioUnitRenderActionFlags*,
+                                  const AudioTimeStamp *,
+                                  UInt32,
+                                  UInt32,
+                                  AudioBufferList *);
 
 #pragma Class body
 
@@ -97,6 +96,9 @@ static void musicSequenceCallback(void *,
   checkError(AUGraphOpen(_processingGraph));
   checkError(AUGraphNodeInfo(_processingGraph, samplerNode, nil, &_samplerUnit));
 
+  // set callback
+  checkError(AudioUnitAddRenderNotify(_samplerUnit, audioUnitCallback, NULL));
+
   AudioUnitElement ioUnitOutputElement = 0;
   AudioUnitElement samplerOutputElement = 0;
   checkError(AUGraphConnectNodeInput(_processingGraph, samplerNode, samplerOutputElement, ioNode, ioUnitOutputElement));
@@ -157,9 +159,6 @@ static void musicSequenceCallback(void *,
 
   checkError(MusicSequenceSetAUGraph(musicSequence, _processingGraph));
 
-  // set callback
-  checkError(MusicSequenceSetUserCallback(musicSequence, musicSequenceCallback, (__bridge void *)(self)));
-
   return musicSequence;
 }
 
@@ -181,12 +180,12 @@ static void checkError(OSStatus err) {
   }
 }
 
-static void musicSequenceCallback(void *inClientData,
-                                  MusicSequence inSequence,
-                                  MusicTrack inTrack,
-                                  MusicTimeStamp inEventTime,
-                                  const MusicEventUserData *inEventData,
-                                  MusicTimeStamp inStartSliceBeat,
-                                  MusicTimeStamp inEndSliceBeat) {
+static OSStatus audioUnitCallback(void *inRefCon,
+                                  AudioUnitRenderActionFlags*	ioActionFlags,
+                                  const AudioTimeStamp *inTimeStamp,
+                                  UInt32 inBusNumber,
+                                  UInt32 inNumberFrames,
+                                  AudioBufferList *ioData) {
   NSLog(@"called");
+  return noErr;
 }
