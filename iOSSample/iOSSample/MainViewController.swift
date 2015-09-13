@@ -15,7 +15,12 @@ class MainViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    sequencer.loadTune()
+    let tunePath = NSBundle.mainBundle().pathForResource("sample_tune", ofType: "txt")!
+    let tuneString = String(contentsOfFile: tunePath, encoding: NSUTF8StringEncoding, error: nil)!
+    let parser = ABCParser(string: tuneString)
+
+    sequencer.loadTune(parser.parse().tune!)
+
     // Do any additional setup after loading the view.
   }
 

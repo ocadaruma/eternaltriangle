@@ -12,6 +12,7 @@
 		DE0B65081B947FCF0045CA5C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE0B65061B947FCF0045CA5C /* LaunchScreen.xib */; };
 		DE0B65141B947FD00045CA5C /* iOSSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B65131B947FD00045CA5C /* iOSSampleTests.swift */; };
 		DE0B652D1B94812E0045CA5C /* EternalTriangle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DE0B65281B9481170045CA5C /* EternalTriangle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DED316C91BA582EF00E45633 /* sample_tune.txt in Resources */ = {isa = PBXBuildFile; fileRef = DED316C81BA582EF00E45633 /* sample_tune.txt */; };
 		DEFE6EBF1BA31D0700BA76B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEFE6EBE1BA31D0700BA76B4 /* Main.storyboard */; };
 		DEFE6EC21BA31D2400BA76B4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE6EC11BA31D2400BA76B4 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,7 @@
 		DE0B65121B947FD00045CA5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE0B65131B947FD00045CA5C /* iOSSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSSampleTests.swift; sourceTree = "<group>"; };
 		DE0B65221B9481160045CA5C /* EternalTriangle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EternalTriangle.xcodeproj; path = ../EternalTriangle/EternalTriangle.xcodeproj; sourceTree = "<group>"; };
+		DED316C81BA582EF00E45633 /* sample_tune.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample_tune.txt; sourceTree = "<group>"; };
 		DEFE6EBE1BA31D0700BA76B4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DEFE6EC11BA31D2400BA76B4 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +122,7 @@
 				DE0B65001B947FCF0045CA5C /* Supporting Files */,
 				DEFE6EBE1BA31D0700BA76B4 /* Main.storyboard */,
 				DEFE6EC11BA31D2400BA76B4 /* MainViewController.swift */,
+				DED316C81BA582EF00E45633 /* sample_tune.txt */,
 			);
 			path = iOSSample;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEFE6EBF1BA31D0700BA76B4 /* Main.storyboard in Resources */,
+				DED316C91BA582EF00E45633 /* sample_tune.txt in Resources */,
 				DE0B65081B947FCF0045CA5C /* LaunchScreen.xib in Resources */,
 				DE0B65051B947FCF0045CA5C /* Images.xcassets in Resources */,
 			);

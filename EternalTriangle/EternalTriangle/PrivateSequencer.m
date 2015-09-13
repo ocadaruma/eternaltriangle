@@ -7,7 +7,6 @@
 //
 
 #import "PrivateSequencer.h"
-#import <EternalTriangle/EternalTriangle-Swift.h>
 
 #pragma C function prototype decls
 static void checkError(OSStatus);
