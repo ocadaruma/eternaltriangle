@@ -1,17 +1,9 @@
 X:1
-T:Zocharti Loch
-C:Louis Lewandowski (1821-1894)
-M:C
-Q:1/4=76
-%%score (T1 T2) (B1 B2)
-V:T1           clef=treble
-V:B1           clef=bass
-L:1/4
-K:Gm
-%            End of header, start of tune body:
-% 1
-[V:T1] CEAGFGEF | DFBAGAFG |
-[V:B1] cg,ceagfe | da,dfbagf |
-% 5
-[V:T1] EGcBABGA | FGEFDEC2 ||
-[V:B1] ecegc'bag | defgabc' ||
+T:Speed the Plough
+M:4/4
+C:Trad.
+K:G
+|:GABc dedB|dedB dedB|c2(3[ace]/d/c/ B2dB|c2A2 A2BA|
+GABc dedB|dedB dedB|c2ec B2dB|A2F2 G4:|
+|:g2gf gdBd|g2f2 e2d2|c2ec B2dB|c2A2 A2df|
+g2gf g2Bd|g2f2 e2d2|c2ec B2dB|A2F2 G4:|

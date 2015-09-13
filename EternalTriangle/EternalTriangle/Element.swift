@@ -9,13 +9,18 @@
 import Foundation
 
 public protocol MusicalElement {}
-public protocol TupletMember : MusicalElement {}
+public protocol HasLength {
+  var length: NoteLength { get }
+}
+public protocol TupletMember : MusicalElement, HasLength {}
 
 public enum Simple : MusicalElement {
   case BarLine
   case DoubleBarLine
   case SlurStart
   case SlurEnd
+  case RepeatStart
+  case RepeatEnd
   case Tie
   case Space
   case LineBreak

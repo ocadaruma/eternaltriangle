@@ -106,6 +106,14 @@ let parseDoubleBarLine = createParser("\\|\\|", { m -> MusicalElement in
   Simple.DoubleBarLine
 })
 
+let parseRepeatStart = createParser("\\|:", { m -> MusicalElement in
+  Simple.RepeatStart
+})
+
+let parseRepeatEnd = createParser(":\\|", { m -> MusicalElement in
+  Simple.RepeatEnd
+})
+
 let parseBarLine = createParser("\\|", { m -> MusicalElement in
   Simple.BarLine
 })
@@ -268,6 +276,8 @@ func parseTuplet(s: String) -> (ParseResult<MusicalElement>, String) {
 
 let parseElement = parseTuplet ||
   parseDoubleBarLine ||
+  parseRepeatStart ||
+  parseRepeatEnd ||
   parseBarLine ||
   parseSlurStart ||
   parseSlurEnd ||

@@ -18,8 +18,9 @@ class MainViewController: UIViewController {
     let tunePath = NSBundle.mainBundle().pathForResource("sample_tune", ofType: "txt")!
     let tuneString = String(contentsOfFile: tunePath, encoding: NSUTF8StringEncoding, error: nil)!
     let parser = ABCParser(string: tuneString)
+    let result = parser.parse()
 
-    sequencer.loadTune(parser.parse().tune!)
+    sequencer.loadTune(result.tune!)
 
     // Do any additional setup after loading the view.
   }
