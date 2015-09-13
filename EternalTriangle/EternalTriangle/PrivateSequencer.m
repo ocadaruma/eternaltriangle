@@ -6,9 +6,8 @@
 //  Copyright (c) 2015 Haruki Okada. All rights reserved.
 //
 
-#import "Sequencer.h"
+#import "PrivateSequencer.h"
 #import <EternalTriangle/EternalTriangle-Swift.h>
-#import <AudioToolbox/AudioToolbox.h>
 
 #pragma C function prototype decls
 static void checkError(OSStatus);
@@ -21,13 +20,42 @@ static OSStatus audioUnitCallback(void *,
 
 static void prepareAUGraph(AUGraph*, AUNode*, AudioUnit*);
 static void loadSF2Preset(UInt8, AudioUnit);
-static MusicTrack createTrack(MusicSequence, AUNode);
 static MusicSequence createSequence(AUGraph);
 static MusicPlayer createPlayer(MusicSequence);
+static void loadVoice(MIDIVoice*, MusicSequence, AUNode);
 
 #pragma Class body
 
-@interface Sequencer ()
+@implementation MIDINote
+
+- (instancetype)initWithMessage:(MIDINoteMessage)message timestamp:(MusicTimeStamp)timestamp {
+  self = [self init];
+
+  if (self) {
+    self.message = message;
+    self.timestamp = timestamp;
+  }
+
+  return self;
+}
+
+@end
+
+@implementation MIDIVoice
+
+- (instancetype)initWithNotes:(NSArray *)notes {
+  self = [self init];
+
+  if (self) {
+    self.notes = notes;
+  }
+
+  return self;
+}
+
+@end
+
+@interface PrivateSequencer ()
 
 @property (nonatomic) AUGraph processingGraph;
 @property (nonatomic) AudioUnit mixerUnit;
@@ -35,24 +63,17 @@ static MusicPlayer createPlayer(MusicSequence);
 @property (nonatomic) MusicPlayer musicPlayer;
 @property (nonatomic) MusicSequence musicSequence;
 
-@property (nonatomic) UInt32 numTracks;
-
 @end
 
-@implementation Sequencer
+@implementation PrivateSequencer
 
 - (instancetype)init {
   self = [super init];
 
   if (self) {
-    self.numTracks = 2;
-
     prepareAUGraph(&_processingGraph, &_mixerNode, &_mixerUnit);
     self.musicSequence = createSequence(_processingGraph);
     self.musicPlayer = createPlayer(_musicSequence);
-
-    [self prepareSamplerNodes];
-    [self startAUGraph];
   }
 
   return self;
@@ -77,14 +98,8 @@ static MusicPlayer createPlayer(MusicSequence);
   checkError(MusicPlayerStop(_musicPlayer));
 }
 
-- (void)prepareSamplerNodes {
-  checkError(AudioUnitSetProperty(_mixerUnit,
-                                  kAudioUnitProperty_ElementCount,
-                                  kAudioUnitScope_Input,
-                                  0,
-                                  &_numTracks, sizeof(_numTracks)));
-
-  for (UInt32 i = 0; i < _numTracks; i++) {
+- (void)loadVoices:(NSArray *)voices {
+  [voices enumerateObjectsUsingBlock:^(MIDIVoice* voice, NSUInteger idx, BOOL *stop) {
     // create sampler
     AUNode samplerNode;
     AudioComponentDescription desc;
@@ -97,11 +112,13 @@ static MusicPlayer createPlayer(MusicSequence);
 
     AudioUnit samplerUnit;
     checkError(AUGraphNodeInfo(_processingGraph, samplerNode, NULL, &samplerUnit));
-    checkError(AUGraphConnectNodeInput(_processingGraph, samplerNode, 0, _mixerNode, i));
+    checkError(AUGraphConnectNodeInput(_processingGraph, samplerNode, 0, _mixerNode, (UInt32)idx));
 
     loadSF2Preset(0, samplerUnit);
-    createTrack(_musicSequence, samplerNode);
-  }
+    loadVoice(voice, _musicSequence, samplerNode);
+  }];
+
+  [self startAUGraph];
 }
 
 - (void)startAUGraph {
@@ -171,7 +188,7 @@ static void prepareAUGraph(AUGraph *outGraph, AUNode *mixerNode, AudioUnit *mixe
 }
 
 static void loadSF2Preset(UInt8 preset, AudioUnit unit) {
-  NSURL* bankURL = [[NSBundle bundleForClass:[Sequencer class]] URLForResource:@"vibraphone" withExtension:@"sf2"];
+  NSURL* bankURL = [[NSBundle bundleForClass:[PrivateSequencer class]] URLForResource:@"vibraphone" withExtension:@"sf2"];
   AUSamplerInstrumentData instData;
   instData.fileURL = (__bridge CFURLRef)bankURL;
   instData.instrumentType = kInstrumentType_DLSPreset;
@@ -187,26 +204,16 @@ static void loadSF2Preset(UInt8 preset, AudioUnit unit) {
                                   sizeof(AUSamplerInstrumentData)));
 }
 
-static MusicTrack createTrack(MusicSequence sequence, AUNode inNode) {
+static void loadVoice(MIDIVoice* voice, MusicSequence sequence, AUNode inNode) {
   MusicTrack track;
   checkError(MusicSequenceNewTrack(sequence, &track));
 
-  MusicTimeStamp beat = 1.0;
-  for (UInt8 i = 60; i <= 72; i++) {
-    MIDINoteMessage message;
-    message.channel = 0;
-    message.note = i;
-    message.velocity = 64;
-    message.releaseVelocity = 0;
-    message.duration = 0.5;
-
-    checkError(MusicTrackNewMIDINoteEvent(track, beat, &message));
-    beat += 0.5;
-  }
+  [voice.notes enumerateObjectsUsingBlock:^(MIDINote* note, NSUInteger idx, BOOL *stop) {
+    MIDINoteMessage message = note.message;
+    checkError(MusicTrackNewMIDINoteEvent(track, note.timestamp, &message));
+  }];
 
   checkError(MusicTrackSetDestNode(track, inNode));
-
-  return track;
 }
 
 static MusicSequence createSequence(AUGraph inGraph) {

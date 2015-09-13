@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    sequencer.loadTune()
     // Do any additional setup after loading the view.
   }
 
