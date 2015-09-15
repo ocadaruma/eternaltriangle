@@ -24,6 +24,9 @@
 		DE603AAB1BA10DD40059A8CD /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE603AAA1BA10DD40059A8CD /* Renderer.swift */; };
 		DED316C51BA5779400E45633 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED316C41BA5779400E45633 /* Sequencer.swift */; };
 		DED316C71BA57FCC00E45633 /* MIDIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED316C61BA57FCC00E45633 /* MIDIUtility.swift */; };
+		DED316CF1BA6534400E45633 /* SheetElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED316CE1BA6534400E45633 /* SheetElement.swift */; };
+		DED316D41BA7A67400E45633 /* Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED316D31BA7A67400E45633 /* Rest.swift */; };
+		DED316D61BA7A6DB00E45633 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED316D51BA7A6DB00E45633 /* UIView.swift */; };
 		DEFE6EBA1BA1B57600BA76B4 /* ABCParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE6EB91BA1B57600BA76B4 /* ABCParser.swift */; };
 		DEFE6EC41BA3206C00BA76B4 /* vibraphone.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DEFE6EC31BA3206C00BA76B4 /* vibraphone.sf2 */; };
 		DEFE6EC81BA4506E00BA76B4 /* PrivateSequencer.h in Headers */ = {isa = PBXBuildFile; fileRef = DEFE6EC61BA4506E00BA76B4 /* PrivateSequencer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -61,6 +64,9 @@
 		DE603AAA1BA10DD40059A8CD /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		DED316C41BA5779400E45633 /* Sequencer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
 		DED316C61BA57FCC00E45633 /* MIDIUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIUtility.swift; sourceTree = "<group>"; };
+		DED316CE1BA6534400E45633 /* SheetElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetElement.swift; sourceTree = "<group>"; };
+		DED316D31BA7A67400E45633 /* Rest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rest.swift; sourceTree = "<group>"; };
+		DED316D51BA7A6DB00E45633 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		DEFE6EB91BA1B57600BA76B4 /* ABCParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABCParser.swift; sourceTree = "<group>"; };
 		DEFE6EC31BA3206C00BA76B4 /* vibraphone.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = vibraphone.sf2; sourceTree = "<group>"; };
 		DEFE6EC61BA4506E00BA76B4 /* PrivateSequencer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateSequencer.h; sourceTree = "<group>"; };
@@ -201,6 +207,7 @@
 		DE603AA11B9FF7F40059A8CD /* Render */ = {
 			isa = PBXGroup;
 			children = (
+				DED316CB1BA652CA00E45633 /* Element */,
 				DE603AAA1BA10DD40059A8CD /* Renderer.swift */,
 			);
 			name = Render;
@@ -213,6 +220,24 @@
 				DEFE6EC71BA4506E00BA76B4 /* PrivateSequencer.m */,
 			);
 			name = Private;
+			sourceTree = "<group>";
+		};
+		DED316CB1BA652CA00E45633 /* Element */ = {
+			isa = PBXGroup;
+			children = (
+				DED316D21BA7A65A00E45633 /* Rest */,
+				DED316CE1BA6534400E45633 /* SheetElement.swift */,
+				DED316D51BA7A6DB00E45633 /* UIView.swift */,
+			);
+			name = Element;
+			sourceTree = "<group>";
+		};
+		DED316D21BA7A65A00E45633 /* Rest */ = {
+			isa = PBXGroup;
+			children = (
+				DED316D31BA7A67400E45633 /* Rest.swift */,
+			);
+			name = Rest;
 			sourceTree = "<group>";
 		};
 		DEFE6EBB1BA31C5D00BA76B4 /* Sounds */ = {
@@ -335,12 +360,15 @@
 			files = (
 				DE0B65731B948A370045CA5C /* Core.swift in Sources */,
 				DEFE6EC91BA4506E00BA76B4 /* PrivateSequencer.m in Sources */,
+				DED316CF1BA6534400E45633 /* SheetElement.swift in Sources */,
+				DED316D41BA7A67400E45633 /* Rest.swift in Sources */,
 				DE0B657D1B94A1180045CA5C /* Tune.swift in Sources */,
 				DE0B65771B9499FE0045CA5C /* Parser.swift in Sources */,
 				DED316C51BA5779400E45633 /* Sequencer.swift in Sources */,
 				DE0B65331B94848A0045CA5C /* StringScanner.swift in Sources */,
 				DE0B65891B9736EB0045CA5C /* String.swift in Sources */,
 				DE0B657A1B949D590045CA5C /* Header.swift in Sources */,
+				DED316D61BA7A6DB00E45633 /* UIView.swift in Sources */,
 				DE603AAB1BA10DD40059A8CD /* Renderer.swift in Sources */,
 				DEFE6EBA1BA1B57600BA76B4 /* ABCParser.swift in Sources */,
 				DE0B65751B948DA90045CA5C /* Element.swift in Sources */,
