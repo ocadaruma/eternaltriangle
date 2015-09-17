@@ -27,6 +27,8 @@
 		DED316CF1BA6534400E45633 /* SheetElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED316CE1BA6534400E45633 /* SheetElement.swift */; };
 		DED316D41BA7A67400E45633 /* Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED316D31BA7A67400E45633 /* Rest.swift */; };
 		DED316D61BA7A6DB00E45633 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED316D51BA7A6DB00E45633 /* UIView.swift */; };
+		DED316D81BA8A44B00E45633 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED316D71BA8A44B00E45633 /* Note.swift */; };
+		DED316DA1BA9850F00E45633 /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED316D91BA9850F00E45633 /* Flag.swift */; };
 		DEFE6EBA1BA1B57600BA76B4 /* ABCParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE6EB91BA1B57600BA76B4 /* ABCParser.swift */; };
 		DEFE6EC41BA3206C00BA76B4 /* vibraphone.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DEFE6EC31BA3206C00BA76B4 /* vibraphone.sf2 */; };
 		DEFE6EC81BA4506E00BA76B4 /* PrivateSequencer.h in Headers */ = {isa = PBXBuildFile; fileRef = DEFE6EC61BA4506E00BA76B4 /* PrivateSequencer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -67,6 +69,8 @@
 		DED316CE1BA6534400E45633 /* SheetElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetElement.swift; sourceTree = "<group>"; };
 		DED316D31BA7A67400E45633 /* Rest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rest.swift; sourceTree = "<group>"; };
 		DED316D51BA7A6DB00E45633 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		DED316D71BA8A44B00E45633 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		DED316D91BA9850F00E45633 /* Flag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flag.swift; sourceTree = "<group>"; };
 		DEFE6EB91BA1B57600BA76B4 /* ABCParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABCParser.swift; sourceTree = "<group>"; };
 		DEFE6EC31BA3206C00BA76B4 /* vibraphone.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = vibraphone.sf2; sourceTree = "<group>"; };
 		DEFE6EC61BA4506E00BA76B4 /* PrivateSequencer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateSequencer.h; sourceTree = "<group>"; };
@@ -225,19 +229,13 @@
 		DED316CB1BA652CA00E45633 /* Element */ = {
 			isa = PBXGroup;
 			children = (
-				DED316D21BA7A65A00E45633 /* Rest */,
+				DED316D31BA7A67400E45633 /* Rest.swift */,
+				DED316D71BA8A44B00E45633 /* Note.swift */,
 				DED316CE1BA6534400E45633 /* SheetElement.swift */,
 				DED316D51BA7A6DB00E45633 /* UIView.swift */,
+				DED316D91BA9850F00E45633 /* Flag.swift */,
 			);
 			name = Element;
-			sourceTree = "<group>";
-		};
-		DED316D21BA7A65A00E45633 /* Rest */ = {
-			isa = PBXGroup;
-			children = (
-				DED316D31BA7A67400E45633 /* Rest.swift */,
-			);
-			name = Rest;
 			sourceTree = "<group>";
 		};
 		DEFE6EBB1BA31C5D00BA76B4 /* Sounds */ = {
@@ -369,6 +367,8 @@
 				DE0B65891B9736EB0045CA5C /* String.swift in Sources */,
 				DE0B657A1B949D590045CA5C /* Header.swift in Sources */,
 				DED316D61BA7A6DB00E45633 /* UIView.swift in Sources */,
+				DED316DA1BA9850F00E45633 /* Flag.swift in Sources */,
+				DED316D81BA8A44B00E45633 /* Note.swift in Sources */,
 				DE603AAB1BA10DD40059A8CD /* Renderer.swift in Sources */,
 				DEFE6EBA1BA1B57600BA76B4 /* ABCParser.swift in Sources */,
 				DE0B65751B948DA90045CA5C /* Element.swift in Sources */,

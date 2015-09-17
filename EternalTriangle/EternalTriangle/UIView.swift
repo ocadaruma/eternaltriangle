@@ -11,7 +11,7 @@ import Foundation
 extension UIView {
   var size: (CGFloat, CGFloat) {
     get {
-      return (self.bounds.size.width, self.bounds.size.height)
+      return (bounds.size.width, bounds.size.height)
     }
   }
 }

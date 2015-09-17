@@ -10,7 +10,7 @@ import Foundation
 
 @IBDesignable public class QuarterRest : SheetElement {
   override public func drawRect(rect: CGRect) {
-    let (w, h) = self.size
+    let (w, h) = size
 
     //// Path drawing
     let path = UIBezierPath()
@@ -30,14 +30,14 @@ import Foundation
     path.addLineToPoint(CGPointMake(w * 0.12912, h * -0.00039999999999999996))
 
 
-    self.tintColor.setFill()
+    tintColor.setFill()
     path.fill()
   }
 }
 
 @IBDesignable public class EighthRest : SheetElement {
   override public func drawRect(rect: CGRect) {
-    let (w, h) = self.size
+    let (w, h) = size
 
     //// Path drawing
     let path = UIBezierPath()
@@ -55,14 +55,14 @@ import Foundation
     path.addCurveToPoint(CGPointMake(w * 0.05588, h * 0.24938666666666667), controlPoint1: CGPointMake(w * 0.12252, h * 0.3040733333333333), controlPoint2: CGPointMake(w * 0.08204, h * 0.2665333333333333))
     path.addCurveToPoint(CGPointMake(w * 0.00041, h * 0.15148), controlPoint1: CGPointMake(w * 0.02972, h * 0.23224), controlPoint2: CGPointMake(w * 0.00041, h * 0.20271333333333333))
 
-    self.tintColor.setFill()
+    tintColor.setFill()
     path.fill()
   }
 }
 
 @IBDesignable public class SixteenthRest : SheetElement {
   override public func drawRect(rect: CGRect) {
-    let (w, h) = self.size
+    let (w, h) = size
 
     //// Path drawing
     let path = UIBezierPath()
@@ -90,7 +90,7 @@ import Foundation
     path.addCurveToPoint(CGPointMake(w * 0.37675, h * 0.21166000000000001), controlPoint1: CGPointMake(w * 0.7206199999999999, h * 0.16417), controlPoint2: CGPointMake(w * 0.54149, h * 0.21166000000000001))
     path.addCurveToPoint(CGPointMake(w * 0.14828, h * 0.10742499999999999), controlPoint1: CGPointMake(w * 0.21202000000000001, h * 0.21166000000000001), controlPoint2: CGPointMake(w * 0.14828, h * 0.146015))
 
-    self.tintColor.setFill()
+    tintColor.setFill()
     path.fill()
   }
 }
