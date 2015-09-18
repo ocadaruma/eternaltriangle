@@ -34,7 +34,7 @@
                                     <action selector="stop:" destination="eI2-Im-CZa" eventType="touchUpInside" id="xQW-wv-isA"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zz7-QH-v9M" customClass="FlagEighth" customModule="EternalTriangle">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zz7-QH-v9M" customClass="SymbolC" customModule="EternalTriangle">
                                 <rect key="frame" x="270" y="335" width="64" height="167"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
