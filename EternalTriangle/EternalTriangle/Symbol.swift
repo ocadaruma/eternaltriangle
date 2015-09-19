@@ -102,3 +102,22 @@ import Foundation
     path.fill()
   }
 }
+
+@IBDesignable public class Block: SheetElement {
+  public override func drawRect(rect: CGRect) {
+    let ctx = UIGraphicsGetCurrentContext()
+    tintColor.setFill()
+    CGContextFillRect(ctx, bounds)
+  }
+}
+
+@IBDesignable public class DoubleBar: SheetElement {
+  public override func drawRect(rect: CGRect) {
+    let (width, height) = size
+    let ctx = UIGraphicsGetCurrentContext()
+    let w = width / 3
+    tintColor.setFill()
+    CGContextFillRect(ctx, CGRectMake(0, 0, w, height))
+    CGContextFillRect(ctx, CGRectMake(w * 2, 0, w, height))
+  }
+}
