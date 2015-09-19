@@ -12,7 +12,6 @@ import Foundation
   public override func drawRect(rect: CGRect) {
     let (w, h) = size
 
-    //// Path drawing
     let path = UIBezierPath()
     path.moveToPoint(CGPointMake(w * 0.37420000000000003, h * 0.00036))
     path.addCurveToPoint(CGPointMake(w * 0.26739, h * 0.2962), controlPoint1: CGPointMake(w * 0.36329999999999996, h * 0.11050666666666667), controlPoint2: CGPointMake(w * 0.3053, h * 0.22973333333333334))
@@ -78,7 +77,6 @@ import Foundation
   public override func drawRect(rect: CGRect) {
     let (w, h) = size
 
-    //// Path2 drawing
     let path = UIBezierPath()
     path.moveToPoint(CGPointMake(w * 0.67568, h * 0.37398333333333333))
     path.addCurveToPoint(CGPointMake(w * 0.82632, h * 0.4652583333333334), controlPoint1: CGPointMake(w * 0.68428, h * 0.423725), controlPoint2:CGPointMake(w * 0.74599, h * 0.46615))

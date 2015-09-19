@@ -30,6 +30,7 @@
 		DED316D81BA8A44B00E45633 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED316D71BA8A44B00E45633 /* Note.swift */; };
 		DED316DA1BA9850F00E45633 /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED316D91BA9850F00E45633 /* Flag.swift */; };
 		DED316DC1BABC43E00E45633 /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED316DB1BABC43E00E45633 /* Symbol.swift */; };
+		DED316DE1BAD0FD600E45633 /* Accidental.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED316DD1BAD0FD600E45633 /* Accidental.swift */; };
 		DEFE6EBA1BA1B57600BA76B4 /* ABCParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE6EB91BA1B57600BA76B4 /* ABCParser.swift */; };
 		DEFE6EC41BA3206C00BA76B4 /* vibraphone.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = DEFE6EC31BA3206C00BA76B4 /* vibraphone.sf2 */; };
 		DEFE6EC81BA4506E00BA76B4 /* PrivateSequencer.h in Headers */ = {isa = PBXBuildFile; fileRef = DEFE6EC61BA4506E00BA76B4 /* PrivateSequencer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -73,6 +74,7 @@
 		DED316D71BA8A44B00E45633 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		DED316D91BA9850F00E45633 /* Flag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flag.swift; sourceTree = "<group>"; };
 		DED316DB1BABC43E00E45633 /* Symbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
+		DED316DD1BAD0FD600E45633 /* Accidental.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accidental.swift; sourceTree = "<group>"; };
 		DEFE6EB91BA1B57600BA76B4 /* ABCParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABCParser.swift; sourceTree = "<group>"; };
 		DEFE6EC31BA3206C00BA76B4 /* vibraphone.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = vibraphone.sf2; sourceTree = "<group>"; };
 		DEFE6EC61BA4506E00BA76B4 /* PrivateSequencer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateSequencer.h; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				DED316D51BA7A6DB00E45633 /* UIView.swift */,
 				DED316D91BA9850F00E45633 /* Flag.swift */,
 				DED316DB1BABC43E00E45633 /* Symbol.swift */,
+				DED316DD1BAD0FD600E45633 /* Accidental.swift */,
 			);
 			name = Element;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				DE0B65331B94848A0045CA5C /* StringScanner.swift in Sources */,
 				DE0B65891B9736EB0045CA5C /* String.swift in Sources */,
 				DE0B657A1B949D590045CA5C /* Header.swift in Sources */,
+				DED316DE1BAD0FD600E45633 /* Accidental.swift in Sources */,
 				DED316D61BA7A6DB00E45633 /* UIView.swift in Sources */,
 				DED316DA1BA9850F00E45633 /* Flag.swift in Sources */,
 				DED316D81BA8A44B00E45633 /* Note.swift in Sources */,

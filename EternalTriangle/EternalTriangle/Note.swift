@@ -30,7 +30,7 @@ import Foundation
       CGContextTranslateCTM(ctx, -w / 2, -height / 2)
     }
 
-    //// Oval drawing
+    // Oval drawing
     let oval = UIBezierPath()
     oval.moveToPoint(CGPointMake(w * 0.19588999999999998, y + h * 0.20055555555555557))
     oval.addCurveToPoint(CGPointMake(w * 0.09838, y + h * 0.8963777777777778), controlPoint1: CGPointMake(w * -0.02521, y + h * 0.4212), controlPoint2: CGPointMake(w * -0.06887, y + h * 0.7327333333333333))
@@ -39,7 +39,7 @@ import Foundation
     oval.addCurveToPoint(CGPointMake(w * 0.19588999999999998, y + h * 0.20055555555555557), controlPoint1: CGPointMake(w * 0.73179, y + h * -0.0662888888888889), controlPoint2: CGPointMake(w * 0.41698, y + h * -0.02008888888888889))
 
 
-    //Oval color fill
+    // Oval color fill
     tintColor.setFill()
     oval.fill()
 
@@ -69,7 +69,7 @@ import Foundation
       CGContextTranslateCTM(ctx, -w / 2, -height / 2)
     }
 
-    //// Oval drawing
+    // Oval drawing
     let oval = UIBezierPath()
     oval.moveToPoint(CGPointMake(w * 0.19588999999999998, y + h * 0.20055555555555557))
     oval.addCurveToPoint(CGPointMake(w * 0.09838, y + h * 0.8963777777777778), controlPoint1: CGPointMake(w * -0.02521, y + h * 0.4212), controlPoint2: CGPointMake(w * -0.06887, y + h * 0.7327333333333333))
@@ -78,11 +78,11 @@ import Foundation
     oval.addCurveToPoint(CGPointMake(w * 0.19588999999999998, y + h * 0.20055555555555557), controlPoint1: CGPointMake(w * 0.73179, y + h * -0.0662888888888889), controlPoint2: CGPointMake(w * 0.41698, y + h * -0.02008888888888889))
 
 
-    //Oval color fill
+    // Oval color fill
     tintColor.setFill()
     oval.fill()
 
-    //// Oval2 drawing
+    // Oval2 drawing
     let oval2 = UIBezierPath()
     oval2.moveToPoint(CGPointMake(w * 0.19219999999999998, y + h * 0.5243444444444445))
     oval2.addCurveToPoint(CGPointMake(w * 0.25123, y + h * 0.8863), controlPoint1: CGPointMake(w * 0.05276, y + h * 0.7376888888888888), controlPoint2: CGPointMake(w * 0.07919, y + h * 0.8997444444444445))
@@ -91,7 +91,7 @@ import Foundation
     oval2.addCurveToPoint(CGPointMake(w * 0.19219999999999998, y + h * 0.5243444444444445), controlPoint1: CGPointMake(w * 0.58414, y + h * 0.12715555555555558), controlPoint2: CGPointMake(w * 0.33164, y + h * 0.311))
 
 
-    //Oval2 color fill
+    // Oval2 color fill
     backgroundColor?.setFill()
     oval2.fill()
     
@@ -104,14 +104,14 @@ import Foundation
   public override func drawRect(rect: CGRect) {
     let (w, h) = size
 
-    //// Oval drawing
+    // Oval drawing
     let oval = UIBezierPath(rect: bounds)
 
-    //Oval color fill
+    // Oval color fill
     tintColor.setFill()
     oval.fill()
 
-    //// Oval2 drawing
+    // Oval2 drawing
     let oval2 = UIBezierPath()
     oval2.moveToPoint(CGPointMake(w * 0.71433, h * 0.32087))
     oval2.addCurveToPoint(CGPointMake(w * 0.25504, h * 0.11904), controlPoint1: CGPointMake(w * 0.5733, h * 0.10984), controlPoint2: CGPointMake(w * 0.36767, h * 0.0194857))
@@ -120,7 +120,7 @@ import Foundation
     oval2.addCurveToPoint(CGPointMake(w * 0.71433, h * 0.32087), controlPoint1: CGPointMake(w * 0.87836, h * 0.7836857), controlPoint2: CGPointMake(w * 0.85535, h * 0.5319))
 
 
-    //Oval2 color fill
+    // Oval2 color fill
     backgroundColor?.setFill()
     oval2.fill()
   }

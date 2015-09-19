@@ -83,7 +83,7 @@ import Foundation
 
     let y = height * 70.0 / 300;
 
-    //// Path2 drawing
+    // Path2 drawing
     let path2 = UIBezierPath()
     path2.moveToPoint(CGPointMake(w * 0.00037999999999999997, y + h * 0.0015391304347826087))
     path2.addCurveToPoint(CGPointMake(w * 0.98078, y + h * 0.5787173913043477), controlPoint1: CGPointMake(w * 0.12842, y + h * 0.1900608695652174), controlPoint2: CGPointMake(w * 0.85273, y + h * 0.39019565217391305))
@@ -97,7 +97,7 @@ import Foundation
 
     let h2 = height * 180 / 300
 
-    //// Path drawing
+    // Path drawing
     let path = UIBezierPath()
     path.moveToPoint(CGPointMake(w * -0.0010299999999999999, h2 * 0.0019666666666666665))
     path.addCurveToPoint(CGPointMake(w * 0.27767, h2 * 0.29969444444444443), controlPoint1: CGPointMake(w * -0.0010299999999999999, h2 * 0.0019666666666666665), controlPoint2: CGPointMake(w * 0.02165, h2 * 0.13217777777777778))
