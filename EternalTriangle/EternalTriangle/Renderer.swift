@@ -9,15 +9,13 @@
 import Foundation
 
 public class Layout {
-  let numStaff: Int
   let sheetMargin: UIEdgeInsets
 
-  public init(numStaff: Int, sheetMargin: UIEdgeInsets) {
-    self.numStaff = numStaff
+  public init(sheetMargin: UIEdgeInsets) {
     self.sheetMargin = sheetMargin
   }
 
-  public static let defaultLayout: Layout = Layout(numStaff: 4, sheetMargin: UIEdgeInsetsZero)
+  public static let defaultLayout: Layout = Layout(sheetMargin: UIEdgeInsetsZero)
 }
 
 public class Renderer : UIView {
