@@ -34,8 +34,8 @@
                                     <action selector="stop:" destination="eI2-Im-CZa" eventType="touchUpInside" id="xQW-wv-isA"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zz7-QH-v9M" customClass="SymbolC" customModule="EternalTriangle">
-                                <rect key="frame" x="270" y="335" width="64" height="167"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zz7-QH-v9M" customClass="OneLineSheet" customModule="EternalTriangle">
+                                <rect key="frame" x="16" y="66" width="568" height="514"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -44,9 +44,16 @@
                             <constraint firstItem="etC-n0-GEP" firstAttribute="top" secondItem="VZW-ex-2pT" secondAttribute="bottom" constant="8" id="0Ef-6Z-g7S"/>
                             <constraint firstItem="etC-n0-GEP" firstAttribute="leading" secondItem="kRL-nv-RQK" secondAttribute="leading" constant="16" id="6dN-ne-QxW"/>
                             <constraint firstItem="ASE-jU-0GX" firstAttribute="top" secondItem="VZW-ex-2pT" secondAttribute="bottom" constant="8" id="CWn-sU-kCp"/>
+                            <constraint firstItem="Zz7-QH-v9M" firstAttribute="leading" secondItem="kRL-nv-RQK" secondAttribute="leading" constant="16" id="PUb-zj-Aqr"/>
+                            <constraint firstItem="0zp-hC-rbZ" firstAttribute="top" secondItem="Zz7-QH-v9M" secondAttribute="bottom" constant="20" id="ZmQ-pj-5Ug"/>
+                            <constraint firstItem="Zz7-QH-v9M" firstAttribute="top" secondItem="ASE-jU-0GX" secondAttribute="bottom" constant="8" id="bIo-Fd-Z3j"/>
+                            <constraint firstAttribute="trailing" secondItem="Zz7-QH-v9M" secondAttribute="trailing" constant="16" id="v51-KG-CFY"/>
                             <constraint firstAttribute="trailing" secondItem="ASE-jU-0GX" secondAttribute="trailing" constant="16" id="vKd-kn-mpb"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="sheet" destination="Zz7-QH-v9M" id="eZf-v8-ojN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="389-23-6RJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

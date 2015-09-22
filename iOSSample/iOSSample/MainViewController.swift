@@ -11,6 +11,9 @@ import EternalTriangle
 
 class MainViewController: UIViewController {
   private let sequencer = Sequencer()
+  private var tune: Tune! = nil
+
+  @IBOutlet weak var sheet: OneLineSheet!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -20,9 +23,14 @@ class MainViewController: UIViewController {
     let parser = ABCParser(string: tuneString)
     let result = parser.parse()
 
-    sequencer.loadTune(result.tune!)
+    tune = result.tune
+//    sequencer.loadTune(tune)
 
     // Do any additional setup after loading the view.
+  }
+
+  override func viewDidAppear(animated: Bool) {
+    sheet.loadTune(tune)
   }
 
   override func didReceiveMemoryWarning() {
