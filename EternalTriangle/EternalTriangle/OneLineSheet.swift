@@ -98,6 +98,6 @@ public class OneLineSheetLayout {
     let noteInterval = staffInterval / 2
     let c0 = staffTop + noteInterval * 9
 
-    return c0 - CGFloat(7 * pitch.offset + pitch.name.rawValue) * noteInterval + layout.staveLineWidth
+    return c0 - CGFloat(7 * pitch.offset + pitch.name.rawValue) * noteInterval
   }
 }

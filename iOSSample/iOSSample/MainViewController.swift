@@ -12,6 +12,7 @@ import EternalTriangle
 class MainViewController: UIViewController {
   private let sequencer = Sequencer()
   private var tune: Tune! = nil
+  private var animator: Animator! = nil
 
   @IBOutlet weak var sheet: OneLineSheet!
 
@@ -25,11 +26,12 @@ class MainViewController: UIViewController {
 
     tune = result.tune
 //    sequencer.loadTune(tune)
+    animator = Animator(target: sheet, tempo: tune.tuneHeader.tempo, distancePerUnit: 30)
 
     // Do any additional setup after loading the view.
   }
 
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidLayoutSubviews() {
     sheet.loadTune(tune)
   }
 
@@ -40,11 +42,13 @@ class MainViewController: UIViewController {
   }
 
   @IBAction func start(sender: AnyObject) {
-    sequencer.play()
+//    sequencer.play()
+    animator.start()
   }
 
   @IBAction func stop(sender: AnyObject) {
-    sequencer.stop()
+//    sequencer.stop()
+    animator.stop()
   }
 
   /*
