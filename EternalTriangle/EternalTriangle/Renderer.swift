@@ -35,7 +35,7 @@ public class Renderer : UIView {
   }
 
   private func renderStaff() {
-    let ctx = UIGraphicsGetCurrentContext()
+//    let ctx = UIGraphicsGetCurrentContext()
   }
 
   private func renderHeader() {

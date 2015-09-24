@@ -20,7 +20,7 @@ class MainViewController: UIViewController {
     super.viewDidLoad()
 
     let tunePath = NSBundle.mainBundle().pathForResource("sample_tune", ofType: "txt")!
-    let tuneString = String(contentsOfFile: tunePath, encoding: NSUTF8StringEncoding, error: nil)!
+    let tuneString = try! String(contentsOfFile: tunePath, encoding: NSUTF8StringEncoding)
     let parser = ABCParser(string: tuneString)
     let result = parser.parse()
 

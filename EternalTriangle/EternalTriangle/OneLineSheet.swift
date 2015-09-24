@@ -45,7 +45,7 @@ public class OneLineSheetLayout {
           view.backgroundColor = UIColor.clearColor()
           view.frame = rect
           addSubview(view)
-        case let tuplet as Tuplet: ()
+//        case let tuplet as Tuplet: ()
         case let chord as Chord:
           x += noteLengthToWidth(chord.length)
         case let rest as Rest:
@@ -78,7 +78,7 @@ public class OneLineSheetLayout {
   }
 
   private func drawStaff() {
-    let (width, height) = size
+    let (width, _) = size
     let top = staffTop
     let ctx = UIGraphicsGetCurrentContext()
 

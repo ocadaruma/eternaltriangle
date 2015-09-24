@@ -27,46 +27,46 @@ public class Sequencer {
     var voices: [MIDIVoice] = []
     let unitDuration = calculateUnitDuration(tune.tuneHeader.tempo)
 
-    for (index, voice) in enumerate(tune.tuneBody.voices) {
-      let header = tune.tuneHeader.voiceHeaders[index]
+    for (_, voice) in tune.tuneBody.voices.enumerate() {
+//      let header = tune.tuneHeader.voiceHeaders[index]
 
       var notes: [MIDINote] = []
       var timestamp: MusicTimeStamp = 0
       for elem in voice.elements {
         switch elem {
         case let n as Note:
-          let note = pitchToMIDINote(tune.tuneHeader.key, n.pitch)
-          let duration = calculateDuration(n, unitDuration)
-          let message = defaultMIDINoteMessage(note, duration)
+          let note = pitchToMIDINote(tune.tuneHeader.key, pitch: n.pitch)
+          let duration = calculateDuration(n, unitDuration: unitDuration)
+          let message = defaultMIDINoteMessage(note, duration: duration)
 
           notes.append(MIDINote(message: message, timestamp: timestamp))
 
           timestamp += MusicTimeStamp(duration)
         case let c as Chord:
-          let duration = calculateDuration(c, unitDuration)
+          let duration = calculateDuration(c, unitDuration: unitDuration)
           for p in c.pitches {
-            let note = pitchToMIDINote(tune.tuneHeader.key, p)
-            let message = defaultMIDINoteMessage(note, duration)
+            let note = pitchToMIDINote(tune.tuneHeader.key, pitch: p)
+            let message = defaultMIDINoteMessage(note, duration: duration)
             notes.append(MIDINote(message: message, timestamp: timestamp))
           }
           timestamp += MusicTimeStamp(duration)
         case let r as Rest:
-          timestamp += MusicTimeStamp(calculateDuration(r, unitDuration))
+          timestamp += MusicTimeStamp(calculateDuration(r, unitDuration: unitDuration))
         case let mr as MultiMeasureRest:
-          timestamp += MusicTimeStamp(calculateDuration(tune.tuneHeader.meter, mr, unitDuration))
+          timestamp += MusicTimeStamp(calculateDuration(tune.tuneHeader.meter, rest: mr, unitDuration: unitDuration))
         case let t as Tuplet:
           let f = Float32(t.notes) / Float32(t.time)
           for e in t.elements {
-            let duration = calculateDuration(e, unitDuration) * f
+            let duration = calculateDuration(e, unitDuration: unitDuration) * f
             switch e {
             case let n as Note:
-              let note = pitchToMIDINote(tune.tuneHeader.key, n.pitch)
-              let message = defaultMIDINoteMessage(note, duration)
+              let note = pitchToMIDINote(tune.tuneHeader.key, pitch: n.pitch)
+              let message = defaultMIDINoteMessage(note, duration: duration)
               notes.append(MIDINote(message: message, timestamp: timestamp))
             case let c as Chord:
               for p in c.pitches {
-                let note = pitchToMIDINote(tune.tuneHeader.key, p)
-                let message = defaultMIDINoteMessage(note, duration)
+                let note = pitchToMIDINote(tune.tuneHeader.key, pitch: p)
+                let message = defaultMIDINoteMessage(note, duration: duration)
                 notes.append(MIDINote(message: message, timestamp: timestamp))
               }
             default: ()

@@ -17,7 +17,7 @@ public class StringScanner {
 
   public var result: String { get { return string } }
 
-  public var eos: Bool { get { return count(string) <= 0 } }
+  public var eos: Bool { get { return string.characters.count <= 0 } }
 
   public func scan(pattern: String) -> [MatchResult] {
     let results = string.matchesWithPattern(pattern)

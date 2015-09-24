@@ -12,8 +12,6 @@ import Foundation
   public override func drawRect(rect: CGRect) {
     let (w, h) = size
 
-    let ctx = UIGraphicsGetCurrentContext()
-
     // Oval drawing
     let oval = UIBezierPath()
     oval.moveToPoint(CGPointMake(w * 0.19588999999999998, h * 0.20055555555555557))

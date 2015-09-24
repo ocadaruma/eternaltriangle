@@ -70,7 +70,7 @@ func createParser<T>(pattern: String, op: [MatchResult] -> T) -> String -> (Pars
     if matches.isEmpty {
       return (ParseResult(result: nil, ateLength: 0), string)
     } else {
-      return (ParseResult(result: op(matches), ateLength: count(matches[0].match)), scanner.result)
+      return (ParseResult(result: op(matches), ateLength: matches[0].match.characters.count), scanner.result)
     }
   }
 }
@@ -82,7 +82,7 @@ func eatPattern(pattern: String) -> String -> (EatResult, String) {
     if matches.isEmpty {
       return (emptyEatResult, string)
     } else {
-      return (EatResult(result: true, ateLength: count(matches[0].match)), scanner.result)
+      return (EatResult(result: true, ateLength: matches[0].match.characters.count), scanner.result)
     }
   }
 }
@@ -92,7 +92,7 @@ func || <T, U> (f: T -> (ParseResult<U>, T), g: T -> (ParseResult<U>, T)) -> T -
     let (fR, rest) = f(a)
 
     switch fR.result {
-    case .Some(let r): return (fR, rest)
+    case .Some(_): return (fR, rest)
     case .None: return g(rest)
     }
   }
@@ -103,7 +103,7 @@ func && <T, U, V> (f: T -> (ParseResult<U>, T), g: T -> (ParseResult<V>, T)) -> 
     let (fR, rest) = f(a)
 
     switch fR.result {
-    case .Some(let r):
+    case .Some(_):
       let (gR, gRest) = g(rest)
       return (fR, gR, gRest)
     case .None: return (emptyParseResult(), emptyParseResult(), rest)
@@ -119,7 +119,7 @@ func &> <T, U, V> (f: T -> (ParseResult<U>, T), g: T -> (ParseResult<V>, T)) -> 
     let (fR, rest) = f(a)
 
     switch fR.result {
-    case .Some(let _):
+    case .Some(_):
       let (gR, gRest) = g(rest)
       switch gR.result {
       case .Some(let g):
@@ -190,14 +190,14 @@ func &< <T, U> (f: T -> (ArrayParseResult<U>, T), g: T -> (EatResult, T)) -> T -
   }
 }
 
-func repeat<T, U>(f: T -> (ParseResult<U>, T)) -> T -> (ArrayParseResult<U>, T) {
+func many<T, U>(f: T -> (ParseResult<U>, T)) -> T -> (ArrayParseResult<U>, T) {
   return { a -> (ArrayParseResult<U>, T) in
     var fR: ParseResult<U>
     var rest: T = a
     var result: [U] = []
     var ateLength = 0
 
-    do {
+    repeat {
       (fR, rest) = f(rest)
       if let r = fR.result {
         result.append(r)
@@ -208,12 +208,12 @@ func repeat<T, U>(f: T -> (ParseResult<U>, T)) -> T -> (ArrayParseResult<U>, T) 
   }
 }
 
-func repeat<T>(f: T -> (EatResult, T)) -> T -> (EatResult, T) {
+func many<T>(f: T -> (EatResult, T)) -> T -> (EatResult, T) {
   return { a -> (EatResult, T) in
     var rest: T = a
     var ateLength = 0
     var result: EatResult = emptyEatResult
-    do {
+    repeat {
       (result, rest) = f(rest)
       ateLength += result.ateLength
     } while (result.result)
@@ -221,14 +221,14 @@ func repeat<T>(f: T -> (EatResult, T)) -> T -> (EatResult, T) {
   }
 }
 
-func repeat<T, U>(f: T -> (ParseResult<U>, T), n: Int) -> T -> (ArrayParseResult<U>, T) {
+func many<T, U>(f: T -> (ParseResult<U>, T), n: Int) -> T -> (ArrayParseResult<U>, T) {
   return { a -> (ArrayParseResult<U>, T) in
     var fR: ParseResult<U>
     var rest: T = a
     var result: [U] = []
     var ateLength = 0
 
-    for i in 0..<n {
+    for _ in 0..<n {
       (fR, rest) = f(rest)
       if let r = fR.result {
         result.append(r)
@@ -239,7 +239,7 @@ func repeat<T, U>(f: T -> (ParseResult<U>, T), n: Int) -> T -> (ArrayParseResult
       }
     }
 
-    if count(result) == n {
+    if result.count == n {
       return (ArrayParseResult(result: result, ateLength: ateLength), rest)
     } else {
       return (emptyArrayParseResult(), a)

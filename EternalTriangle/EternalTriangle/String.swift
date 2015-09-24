@@ -16,12 +16,12 @@ public struct MatchResult {
 public extension String {
   public var range: NSRange {
     get {
-      return NSMakeRange(0, count(self))
+      return NSMakeRange(0, self.characters.count)
     }
   }
 
   public func matchesWithPattern(pattern: String) -> [MatchResult] {
-    let regex = NSRegularExpression(pattern: pattern, options: .AnchorsMatchLines, error: nil)
+    let regex = try? NSRegularExpression(pattern: pattern, options: .AnchorsMatchLines)
 
     let match = regex?.firstMatchInString(self,
       options: .Anchored,
@@ -33,8 +33,8 @@ public extension String {
       for i in 0..<n {
         let r = m.rangeAtIndex(i)
         if r.location != NSNotFound {
-          let start = advance(self.startIndex, r.location)
-          let end = advance(start, r.length)
+          let start = self.startIndex.advancedBy(r.location)
+          let end = start.advancedBy(r.length)
           let range = start..<end
 
           let result = MatchResult(

@@ -43,12 +43,12 @@ func pitchToMIDINote(key: Key, pitch: Pitch) -> UInt8 {
 
   var accidental = 0
   if let pitches = keySignatureMapFlat[key.keySignature] {
-    if contains(pitches, pitch.name) {
+    if pitches.contains(pitch.name) {
       accidental = -1
     }
   }
   if let pitches = keySignatureMapSharp[key.keySignature] {
-    if contains(pitches, pitch.name) {
+    if pitches.contains(pitch.name) {
       accidental = 1
     }
   }

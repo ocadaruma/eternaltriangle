@@ -10,19 +10,19 @@ import Foundation
 
 // parsers for header
 
-let parseReference = createParser("^X:\\s*(\\d+)$\n?", { m -> Header in
-  Reference(number: m[1].match.toInt()!)
+let parseReference = createParser("^X:\\s*(\\d+)$\n?", op: { m -> Header in
+  Reference(number: Int(m[1].match)!)
 })
 
-let parseTuneTitle = createParser("^T:\\s*(.+)$\n?", { m -> Header in
+let parseTuneTitle = createParser("^T:\\s*(.+)$\n?", op: { m -> Header in
   TuneTitle(title: m[1].match)
 })
 
-let parseComposer = createParser("^C:\\s*(.+)$\n?", { m -> Header in
+let parseComposer = createParser("^C:\\s*(.+)$\n?", op: { m -> Header in
   Composer(name: m[1].match)
 })
 
-let parseMeter = createParser("^M:\\s*((?:\\d+/\\d+)|C\\||C)$\n?", { matches -> Header in
+let parseMeter = createParser("^M:\\s*((?:\\d+/\\d+)|C\\||C)$\n?", op: { matches -> Header in
   var (num, den) = (4, 4)
   let body = matches[1].match
   switch body {
@@ -32,26 +32,26 @@ let parseMeter = createParser("^M:\\s*((?:\\d+/\\d+)|C\\||C)$\n?", { matches -> 
     (num, den) = (4, 4)
   default:
     let m = body.matchesWithPattern("(\\d+)/(\\d+)")
-    num = m[1].match.toInt()!
-    den = m[2].match.toInt()!
+    num = Int(m[1].match)!
+    den = Int(m[2].match)!
   }
   return Meter(numerator: num, denominator: den)
 })
 
-let parseUnitNoteLength = createParser("^L:\\s*1/(\\d+)$\n?", { m -> Header in
-  let den = m[1].match.toInt()!
+let parseUnitNoteLength = createParser("^L:\\s*1/(\\d+)$\n?", op: { m -> Header in
+  let den = Int(m[1].match)!
   return UnitNoteLength(denominator: UnitDenominator(rawValue: den) ?? .Quarter)
 })
 
-let parseTempo = createParser("^Q:\\s*(\\d+)/(\\d+)=(\\d+)$\n?", { m -> Header in
-  let num = m[1].match.toInt()!
-  let den = m[2].match.toInt()!
-  let bpm = m[3].match.toInt()!
+let parseTempo = createParser("^Q:\\s*(\\d+)/(\\d+)=(\\d+)$\n?", op: { m -> Header in
+  let num = Int(m[1].match)!
+  let den = Int(m[2].match)!
+  let bpm = Int(m[3].match)!
 
   return Tempo(bpm: bpm, inLength: NoteLength(numerator: num, denominator: den))
 })
 
-let parseKey = createParser("^K:\\s*([ABCDEFG][#b]?m?)$\n?", { m -> Header in
+let parseKey = createParser("^K:\\s*([ABCDEFG][#b]?m?)$\n?", op: { m -> Header in
   var sig: KeySignature
 
   switch m[1].match {
@@ -76,7 +76,7 @@ let parseKey = createParser("^K:\\s*([ABCDEFG][#b]?m?)$\n?", { m -> Header in
   return Key(keySignature: sig)
 })
 
-let parseVoiceHeader = createParser("^V:\\s*(\\w+)\\s*(?:clef=(\\w+))?$\n?", { m -> Header in
+let parseVoiceHeader = createParser("^V:\\s*(\\w+)\\s*(?:clef=(\\w+))?$\n?", op: { m -> Header in
   let id = m[1].match
   if m.count < 3 {
     return VoiceHeader(id: id, clef: Clef(clefName: .Treble))
@@ -102,47 +102,47 @@ parseVoiceHeader
 
 // parsers for element
 
-let parseDoubleBarLine = createParser("\\|\\|", { m -> MusicalElement in
+let parseDoubleBarLine = createParser("\\|\\|", op: { m -> MusicalElement in
   Simple.DoubleBarLine
 })
 
-let parseRepeatStart = createParser("\\|:", { m -> MusicalElement in
+let parseRepeatStart = createParser("\\|:", op: { m -> MusicalElement in
   Simple.RepeatStart
 })
 
-let parseRepeatEnd = createParser(":\\|", { m -> MusicalElement in
+let parseRepeatEnd = createParser(":\\|", op: { m -> MusicalElement in
   Simple.RepeatEnd
 })
 
-let parseBarLine = createParser("\\|", { m -> MusicalElement in
+let parseBarLine = createParser("\\|", op: { m -> MusicalElement in
   Simple.BarLine
 })
 
-let parseSlurStart = createParser("\\(", { m -> MusicalElement in
+let parseSlurStart = createParser("\\(", op: { m -> MusicalElement in
   Simple.SlurStart
 })
 
-let parseSlurEnd = createParser("\\)", { m -> MusicalElement in
+let parseSlurEnd = createParser("\\)", op: { m -> MusicalElement in
   Simple.SlurEnd
 })
 
-let parseSpace = createParser("\\s+", { m -> MusicalElement in
+let parseSpace = createParser("\\s+", op: { m -> MusicalElement in
   Simple.Space
 })
 
-let parseTie = createParser("-", { m -> MusicalElement in
+let parseTie = createParser("-", op: { m -> MusicalElement in
   Simple.Tie
 })
 
-let parseLineBreak = createParser("\n", { m -> MusicalElement in
+let parseLineBreak = createParser("\n", op: { m -> MusicalElement in
   Simple.LineBreak
 })
 
-let parseVoiceId = createParser("^\\[V:\\s*(\\w+)\\]", { m -> MusicalElement in
+let parseVoiceId = createParser("^\\[V:\\s*(\\w+)\\]", op: { m -> MusicalElement in
   VoiceId(id: m[1].match)
 })
 
-let parsePitch = createParser("(\\^{0,2}|_{0,2}|=?)([a-g]|[A-G])([',]*)", { m -> Pitch in
+let parsePitch = createParser("(\\^{0,2}|_{0,2}|=?)([a-g]|[A-G])([',]*)", op: { m -> Pitch in
   var accidental: Accidental?
   var pitchName: PitchName
   var offset: Int = 0
@@ -174,8 +174,8 @@ let parsePitch = createParser("(\\^{0,2}|_{0,2}|=?)([a-g]|[A-G])([',]*)", { m ->
   default: pitchName = .C
   }
 
-  offset += count(filter(m[3].match, { $0 == "'" }))
-  offset -= count(filter(m[3].match, { $0 == "," }))
+  offset += m[3].match.characters.filter({ $0 == "'" }).count
+  offset -= m[3].match.characters.filter({ $0 == "," }).count
 
   return Pitch(
     name: pitchName,
@@ -183,32 +183,32 @@ let parsePitch = createParser("(\\^{0,2}|_{0,2}|=?)([a-g]|[A-G])([',]*)", { m ->
     offset: offset)
 })
 
-let parseNoteLength = createParser("(\\d*)/(\\d+)", { m -> NoteLength in
+let parseNoteLength = createParser("(\\d*)/(\\d+)", op: { m -> NoteLength in
   var num: Int
   if m[1].match.isEmpty {
     num = 1
   } else {
-    num = m[1].match.toInt()!
+    num = Int(m[1].match)!
   }
 
   var den: Int
   if m[2].match.isEmpty {
     den = 1
   } else {
-    den = m[2].match.toInt()!
+    den = Int(m[2].match)!
   }
 
   return NoteLength(numerator: num, denominator: den)
-}) || createParser("(\\d*)(/*)", { m -> NoteLength in
+}) || createParser("(\\d*)(/*)", op: { m -> NoteLength in
   var num: Int
   if m[1].match.isEmpty {
     num = 1
   } else {
-    num = m[1].match.toInt()!
+    num = Int(m[1].match)!
   }
 
   var den = 1
-  for i in 0..<count(m[2].match) {
+  for i in 0..<m[2].match.characters.count {
     den *= 2
   }
 
@@ -238,12 +238,12 @@ let parseRest = { (s: String) -> (ParseResult<MusicalElement>, String) in
   return (ParseResult(result: r, ateLength: lengthOpt.ateLength), rest)
 }
 
-let parseMultiMeasureRest = createParser("Z(\\d*)", { m -> MusicalElement in
-  MultiMeasureRest(num: m[1].match.toInt()!)
+let parseMultiMeasureRest = createParser("Z(\\d*)", op: { m -> MusicalElement in
+  MultiMeasureRest(num: Int(m[1].match)!)
 })
 
 let parseChord = { (s: String) -> (ParseResult<MusicalElement>, String) in
-  let (pitchResult, rest) = (eatPattern("\\[") &> repeat(parsePitch) &< eatPattern("\\]"))(s)
+  let (pitchResult, rest) = (eatPattern("\\[") &> many(parsePitch) &< eatPattern("\\]"))(s)
   if pitchResult.isEmpty {
     return (emptyParseResult(), s)
   } else {
@@ -258,12 +258,12 @@ let parseChord = { (s: String) -> (ParseResult<MusicalElement>, String) in
 }
 
 func parseTuplet(s: String) -> (ParseResult<MusicalElement>, String) {
-  let (nOpt, rest) = (createParser("\\(([2-9])", { m -> Int in
-    m[1].match.toInt()!
+  let (nOpt, rest) = (createParser("\\(([2-9])", op: { m -> Int in
+    Int(m[1].match)!
   }))(s)
 
   if let n = nOpt.result {
-    let (elems, eR) = repeat(parseChord || parseNote || parseRest, n)(rest)
+    let (elems, eR) = many(parseChord || parseNote || parseRest, n: n)(rest)
     if elems.isEmpty {
       return (emptyParseResult(), s)
     } else {
@@ -393,10 +393,10 @@ public class ABCParser {
   private func parseIter(string: String, position: Int, headers: [Header], elems: [MusicalElement]) -> TuneParseResult {
     var ateLength = 0
 
-    var (r, str) = repeat(eatComment)(string)
+    var (r, str) = many(eatComment)(string)
     ateLength += r.ateLength
 
-    (r, str) = repeat(eatEmptyLine)(str)
+    (r, str) = many(eatEmptyLine)(str)
     ateLength += r.ateLength
 
     if (str.isEmpty) {
@@ -410,12 +410,12 @@ public class ABCParser {
       if let h = hOpt.result {
         nextHeaders.append(h)
       } else {
-        let (es, eRest) = repeat(parseElement)(str)
+        let (es, eRest) = many(parseElement)(str)
         ateLength += es.ateLength
 
         rest = eRest
         if !es.isEmpty {
-          nextElements.extend(es.result)
+          nextElements.appendContentsOf(es.result)
         }
       }
 
