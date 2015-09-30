@@ -25,7 +25,7 @@ class MainViewController: UIViewController {
     let result = parser.parse()
 
     tune = result.tune
-//    sequencer.loadTune(tune)
+    sequencer.loadTune(tune)
     animator = Animator(target: sheet, tempo: tune.tuneHeader.tempo, distancePerUnit: 30)
 
     // Do any additional setup after loading the view.
@@ -42,12 +42,12 @@ class MainViewController: UIViewController {
   }
 
   @IBAction func start(sender: AnyObject) {
-//    sequencer.play()
+    sequencer.play()
     animator.start()
   }
 
   @IBAction func stop(sender: AnyObject) {
-//    sequencer.stop()
+    sequencer.stop()
     animator.stop()
   }
 

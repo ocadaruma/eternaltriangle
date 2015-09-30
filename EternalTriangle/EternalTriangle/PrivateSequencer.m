@@ -229,5 +229,8 @@ static MusicPlayer createPlayer(MusicSequence inSequence) {
   checkError(MusicPlayerSetSequence(player, inSequence));
   checkError(MusicPlayerPreroll(player));
 
+  // MusicPlayer seems to play 1 musicstamp in 0.5 sec.
+  checkError(MusicPlayerSetPlayRateScalar(player, 0.5));
+
   return player;
 }

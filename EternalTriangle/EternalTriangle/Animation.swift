@@ -18,7 +18,7 @@ public class Animator {
     self.target = target
     let bpmInUnit = tempo.bpm * tempo.inLength.denominator / tempo.inLength.numerator
     let bps = CGFloat(bpmInUnit) / 60
-    velocity = distancePerUnit / bps
+    velocity = distancePerUnit * bps
   }
 
   public func start() {
