@@ -38,6 +38,7 @@ class ParserTests: XCTestCase {
     XCTAssertEqual(v2.clef.clefName, .Bass)
 
     XCTAssertEqual(header.key.keySignature, .Flat2)
+    XCTAssertEqual(header.key.octave, -1)
     XCTAssertEqual(header.unitNoteLength.denominator, .Quarter)
 
     //tune body

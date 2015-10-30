@@ -103,7 +103,7 @@ public class Sequencer {
     checkError(MusicSequenceNewTrack(musicSequence, &track))
     let unitDuration = calculateUnitDuration(tune.tuneHeader.tempo)
 
-    var timestamp: MusicTimeStamp = 0
+    var timestamp: MusicTimeStamp = 0.0001
     for elem in voice.elements {
       switch elem {
       case let n as Note:

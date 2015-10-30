@@ -64,8 +64,10 @@ public enum KeySignature {
 
 public struct Key : Header {
   public let keySignature: KeySignature
-  public init(keySignature: KeySignature) {
+  public let octave: Int
+  public init(keySignature: KeySignature, octave: Int = 0) {
     self.keySignature = keySignature
+    self.octave = octave
   }
 }
 

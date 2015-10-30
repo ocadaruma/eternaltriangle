@@ -64,7 +64,7 @@ func pitchToMIDINote(key: Key, pitch: Pitch) -> UInt8 {
     }
   }
 
-  return UInt8((pitch.offset) * 12 + 60 + note + accidental)
+  return UInt8((pitch.offset + key.octave) * 12 + 60 + note + accidental)
 }
 
 func calculateUnitDuration(tempo: Tempo) -> Float32 {

@@ -51,7 +51,7 @@ let parseTempo = createParser("^Q:\\s*(\\d+)/(\\d+)=(\\d+)$\n?", op: { m -> Head
   return Tempo(bpm: bpm, inLength: NoteLength(numerator: num, denominator: den))
 })
 
-let parseKey = createParser("^K:\\s*([ABCDEFG][#b]?m?)$\n?", op: { m -> Header in
+let parseKey = createParser("^K:\\s*([ABCDEFG][#b]?m?)\\s*(?:octave=(-?\\d))?$\n?", op: { m -> Header in
   var sig: KeySignature
 
   switch m[1].match {
@@ -73,7 +73,11 @@ let parseKey = createParser("^K:\\s*([ABCDEFG][#b]?m?)$\n?", op: { m -> Header i
   default: sig = .Zero
   }
 
-  return Key(keySignature: sig)
+  if m.count > 2 {
+    return Key(keySignature: sig, octave: Int(m[2].match)!)
+  } else {
+    return Key(keySignature: sig)
+  }
 })
 
 let parseVoiceHeader = createParser("^V:\\s*(\\w+)\\s*(?:clef=(\\w+))?$\n?", op: { m -> Header in

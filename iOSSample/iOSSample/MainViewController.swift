@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let tunePath = NSBundle.mainBundle().pathForResource("sample_tune", ofType: "txt")!
+    let tunePath = NSBundle.mainBundle().pathForResource("sample_tune2", ofType: "txt")!
     let tuneString = try! String(contentsOfFile: tunePath, encoding: NSUTF8StringEncoding)
     let parser = ABCParser(string: tuneString)
     let result = parser.parse()
