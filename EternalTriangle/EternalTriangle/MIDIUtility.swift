@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AudioToolbox
 
 let keySignatureMapFlat: [KeySignature : [PitchName]] = [
   .Flat1 : [.B],
